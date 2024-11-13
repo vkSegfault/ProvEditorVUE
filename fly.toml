@@ -1,0 +1,23 @@
+# fly.toml app configuration file generated for vuefinance on 2024-10-16T18:53:00+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'vuefinance'
+primary_region = 'waw'
+
+[build]
+
+[http_service]
+  internal_port = 8080  # DO NOT CHANGE TO 80 !!!
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  size = 'shared-cpu-1x'   # shared-cpu-1x means already 1 vCPU, shared env and 256mb ram so all below is redundant
+  memory = '256mb'
+  cpu_kind = 'shared'
+  cpus = 1
