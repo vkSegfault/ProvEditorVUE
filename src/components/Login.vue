@@ -119,58 +119,8 @@ const handleSubmit = async () => {
         class="text-white bg-green-700 hover:bg-green-900 rounded-md px-3 py-2 mt-4 mb-4"
         >Go Back</RouterLink
       >
+      
     </section>
-
-    <!-- <section class="bg-green-50">
-      <div class="container m-auto max-w-2xl py-24">
-        <div
-          class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0"
-        >
-          <form @submit.prevent="handleSubmit">
-            <h2 class="text-3xl text-center font-semibold mb-6">Login with your credentials:</h2>
-
-            <div class="mb-4">
-              <label class="block text-gray-700 font-bold mb-2"
-                >Email:</label
-              >
-              <input
-                v-model="form.name"
-                type="text"
-                id="name"
-                name="name"
-                class="border rounded w-full py-2 px-3 mb-2"
-                placeholder="Please use your mail adress..."
-                required
-              />
-            </div>
-
-            <div class="mb-4">
-              <label class="block text-gray-700 font-bold mb-2"
-                >Password:</label
-              >
-              <input
-                v-model="form.name"
-                type="text"
-                id="name"
-                name="name"
-                class="border rounded w-full py-2 px-3 mb-2"
-                placeholder="Please use your password..."
-                required
-              />
-            </div>
-
-
-            <div>
-              <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline" type="submit">
-                Login
-              </button>
-            </div>
-            
-          </form>
-        </div>
-      </div>
-    </section> -->
-
 </template>
 
 <style>
