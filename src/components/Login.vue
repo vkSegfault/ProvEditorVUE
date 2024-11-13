@@ -4,8 +4,6 @@ import { reactive } from 'vue';
 import router from '@/router';
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
-import Calendar from 'primevue/calendar';
-import DatePicker from 'primevue/datepicker';
 
 
 const route = useRoute()
@@ -17,14 +15,8 @@ const stringType = type.charAt(0).toUpperCase() + type.slice(1);
 // eveything from submit form will be coppied to below object
 const form = reactive({
   // default type here - when we click add new particular type it should already be picked up and not provided once more
-  type: stringType,
-  name: '',
-  description: '',
-  dateRange: null,
-  value: 0,
-  rate: 0,
-  days: 0,
-  tax: 0
+  email: stringType,
+  password: ''
 });
 
 const toast = useToast();
@@ -32,27 +24,45 @@ const toast = useToast();
 const handleSubmit = async () => {
   // console.log('submit pressed')
   // console.log( form.description )
-  const newBond = {
-    name: form.name,
-    type: form.type.toUpperCase(),
-    description: form.description,
-    value: form.value,
-    rate: form.rate,
-    days: form.days,
-    tax: form.tax
-  };
 
   try {
     // console.log( form.type.toUpperCase() )
     // console.log( newBond )
-    const response = await axios.post(`/proxy/assets/${form.type.toLowerCase()}`, newBond);
-    // console.log(response)
+//     curl -X 'POST' \
+//   'http://localhost:5077/login?useCookies=true' \
+//   -H 'accept: application/json' \
+//   -H 'Content-Type: application/json' \
+//   -d '{
+//   "email": "adtofaust@gmail.com",
+//   "password": "DupaMamuta1!",
+//   "twoFactorCode": "string",
+//   "twoFactorRecoveryCode": "string"
+// }'
+    const response = await axios.post(
+        'http://localhost:5077/login',
+        {
+            'email': `${form.email}`,
+            'password': `${form.password}`,
+            'twoFactorCode': 'string',
+            'twoFactorRecoveryCode': 'string'
+        },
+        {
+            params: {
+            'useCookies': 'true'
+            },
+            headers: {
+            'accept': 'application/json',
+            'Content-Type': 'application/json'
+            }
+        }
+    );
+    console.log(response)
     console.log( `${form.dateRange}` );
-    toast.success('Asset Added Successfully');
+    toast.success('Login successful...');
     router.push(`/asset/${form.type.toLowerCase()}/${response.data.id}`);
   } catch (error) {
-    console.error('Error submitting assets:', error);
-    toast.error('Assed Not Added');
+    console.error('Error:', error);
+    toast.error('Login failed...');
   }
 
 };
