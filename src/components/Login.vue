@@ -7,15 +7,13 @@ import { useToast } from 'vue-toastification';
 
 
 const route = useRoute()
-const type = route.params.type ? route.params.type.toLowerCase() : '';
-const stringType = type.charAt(0).toUpperCase() + type.slice(1);
 // console.log(route.params)
 
 
 // eveything from submit form will be coppied to below object
 const form = reactive({
   // default type here - when we click add new particular type it should already be picked up and not provided once more
-  email: stringType,
+  email: '',
   password: ''
 });
 
@@ -39,7 +37,7 @@ const handleSubmit = async () => {
 //   "twoFactorRecoveryCode": "string"
 // }'
     const response = await axios.post(
-        'http://localhost:5077/login',
+        '/proxy/login',
         {
             'email': `${form.email}`,
             'password': `${form.password}`,
@@ -59,10 +57,10 @@ const handleSubmit = async () => {
     console.log(response)
     console.log( `${form.dateRange}` );
     toast.success('Login successful...');
-    router.push(`/asset/${form.type.toLowerCase()}/${response.data.id}`);
+    router.push(`/assets`);
   } catch (error) {
     console.error('Error:', error);
-    toast.error('Login failed...');
+    toast.error('Wrong credentials...');
   }
 
 };
@@ -81,10 +79,10 @@ const handleSubmit = async () => {
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2">Email:</label>
                     <input
-                        v-model="form.name"
+                        v-model="form.email"
                         type="text"
-                        id="name"
-                        name="name"
+                        id="email"
+                        name="email"
                         class="border rounded w-full py-2 px-3 mb-2"
                         placeholder="Please use your mail adress..."
                         required
@@ -96,10 +94,10 @@ const handleSubmit = async () => {
                     Password:
                 </label>
                 <input
-                    v-model="form.name"
-                    type="text"
-                    id="name"
-                    name="name"
+                    v-model="form.password"
+                    type="password"
+                    id="password"
+                    name="password"
                     class="border rounded w-full py-2 px-3 mb-2"
                     placeholder="Please use your password..."
                     required
