@@ -5,6 +5,6 @@ import AssetTypeList from '@/components/AssetTypeList.vue'
 
 <template>
     <!-- we pass props (args) here to Title.vue component-->
-    <Title title="Best Vue Finance" subtitle='Manage all your money and assets with Vue Finance' />
+    <Title title="Province Editor" subtitle='Add, draw and customize provinces and countries' />
     <AssetTypeList />
 </template>

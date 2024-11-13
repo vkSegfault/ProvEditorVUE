@@ -5,11 +5,11 @@ import { defineProps } from 'vue';
 defineProps({
     title: {
         type: String,
-        default: 'Vue Finance'
+        default: 'Province Editor'
     },
     subtitle: {
         type: String,
-        default: 'Manage all your money and assets with Vue Finance'
+        default: 'Add, draw and edit provinces and countries'
     }
 });
 

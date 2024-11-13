@@ -19,7 +19,7 @@
             <RouterLink class="flex flex-shrink-0 items-center mr-4" to="/">
               <img class="h-10 w-auto" v-bind:src="logo" alt="Vue Finance" />
               <span class="hidden md:block text-white text-2xl font-bold ml-2"
-                >Vue Finance</span
+                >Province Editor</span
               >
             </RouterLink>
             <div class="md:ml-auto">
