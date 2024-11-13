@@ -42,7 +42,7 @@
                 <RouterLink
                   to="/login"
                   :class="[isActiveLink('/login') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
-                  >Login / Register</RouterLink
+                  >Login</RouterLink
                 >
               </div>
             </div>

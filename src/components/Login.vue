@@ -1,25 +1,167 @@
 <script setup>
+import { RouterLink, useRoute  } from 'vue-router';
+import { reactive } from 'vue';
+import router from '@/router';
+import axios from 'axios';
+import { useToast } from 'vue-toastification';
+import Calendar from 'primevue/calendar';
+import DatePicker from 'primevue/datepicker';
 
+
+const route = useRoute()
+const type = route.params.type ? route.params.type.toLowerCase() : '';
+const stringType = type.charAt(0).toUpperCase() + type.slice(1);
+// console.log(route.params)
+
+
+// eveything from submit form will be coppied to below object
+const form = reactive({
+  // default type here - when we click add new particular type it should already be picked up and not provided once more
+  type: stringType,
+  name: '',
+  description: '',
+  dateRange: null,
+  value: 0,
+  rate: 0,
+  days: 0,
+  tax: 0
+});
+
+const toast = useToast();
+
+const handleSubmit = async () => {
+  // console.log('submit pressed')
+  // console.log( form.description )
+  const newBond = {
+    name: form.name,
+    type: form.type.toUpperCase(),
+    description: form.description,
+    value: form.value,
+    rate: form.rate,
+    days: form.days,
+    tax: form.tax
+  };
+
+  try {
+    // console.log( form.type.toUpperCase() )
+    // console.log( newBond )
+    const response = await axios.post(`/proxy/assets/${form.type.toLowerCase()}`, newBond);
+    // console.log(response)
+    console.log( `${form.dateRange}` );
+    toast.success('Asset Added Successfully');
+    router.push(`/asset/${form.type.toLowerCase()}/${response.data.id}`);
+  } catch (error) {
+    console.error('Error submitting assets:', error);
+    toast.error('Assed Not Added');
+  }
+
+};
 </script>
 
 <template>
-    <section class="bg-gradient-to-r from-green-600 to-green-800 py-20 mb-4">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-            <div class="text-center">
 
-                <h1 class="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl">
-                    Login
-                </h1>
+    <section class="text-center flex flex-col justify-center items-center h-144">
+        <i class="pi pi-sign-in text-yellow-500 text-7xl mb-5 mt-5" style="font-size: 5rem"></i>
+        <h1 class="text-5xl font-bold mb-4">Login</h1>
 
-                <div class="login my-4 text-xl text-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-                    <input type="text" v-model="email" placeholder="Enter email...">
-                    <input type="password" v-model="password" placeholder="Enter password...">
-                    <button v-on:click="login">Login</button>
+        <div class="container m-auto max-w-2xl py-10">
+            <div class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
+                <form @submit.prevent="handleSubmit">
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2">Email:</label>
+                    <input
+                        v-model="form.name"
+                        type="text"
+                        id="name"
+                        name="name"
+                        class="border rounded w-full py-2 px-3 mb-2"
+                        placeholder="Please use your mail adress..."
+                        required
+                    />
                 </div>
 
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2">
+                    Password:
+                </label>
+                <input
+                    v-model="form.name"
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="border rounded w-full py-2 px-3 mb-2"
+                    placeholder="Please use your password..."
+                    required
+                />
             </div>
+
+            <div>
+                <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline" type="submit">
+                    Login
+                </button>
+            </div>
+            
+          </form>
         </div>
+      </div>
+
+      <RouterLink
+        to="/"
+        class="text-white bg-green-700 hover:bg-green-900 rounded-md px-3 py-2 mt-4 mb-4"
+        >Go Back</RouterLink
+      >
     </section>
+
+    <!-- <section class="bg-green-50">
+      <div class="container m-auto max-w-2xl py-24">
+        <div
+          class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0"
+        >
+          <form @submit.prevent="handleSubmit">
+            <h2 class="text-3xl text-center font-semibold mb-6">Login with your credentials:</h2>
+
+            <div class="mb-4">
+              <label class="block text-gray-700 font-bold mb-2"
+                >Email:</label
+              >
+              <input
+                v-model="form.name"
+                type="text"
+                id="name"
+                name="name"
+                class="border rounded w-full py-2 px-3 mb-2"
+                placeholder="Please use your mail adress..."
+                required
+              />
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-gray-700 font-bold mb-2"
+                >Password:</label
+              >
+              <input
+                v-model="form.name"
+                type="text"
+                id="name"
+                name="name"
+                class="border rounded w-full py-2 px-3 mb-2"
+                placeholder="Please use your password..."
+                required
+              />
+            </div>
+
+
+            <div>
+              <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline" type="submit">
+                Login
+              </button>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+    </section> -->
 
 </template>
 
