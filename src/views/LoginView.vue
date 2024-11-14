@@ -5,5 +5,5 @@ import LoginGoogle from '@/components/LoginGoogle.vue';
 
 <template>
     <Login></Login>
-    <LoginGoogle></LoginGoogle>
+    <LoginGoogle />
 </template>

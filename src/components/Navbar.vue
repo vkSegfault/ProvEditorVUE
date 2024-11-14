@@ -1,11 +1,11 @@
 <script setup>
-    import logo from '@/assets/logo.svg'
-    import { RouterLink, useRoute } from 'vue-router';
+import logo from '@/assets/logo.svg'
+import { RouterLink, useRoute } from 'vue-router';
 
-    const isActiveLink = (routePath) => {
-      const route = useRoute();
-      return route.path === routePath;
-    }
+const isActiveLink = (routePath) => {
+  const route = useRoute();
+  return route.path === routePath;
+}
 </script>
 
 <template>
