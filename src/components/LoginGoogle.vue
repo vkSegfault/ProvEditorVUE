@@ -13,6 +13,7 @@ const callback = (response) => {
     console.log("Handle the userData (decoded credential)", userData)
 
     try {
+        // response.credential is basically idToken needed for google
         const res = axios.post(`/proxy/api/v1/auth/google`, { "idToken": response.credential });
     } catch (error) {
         console.error('Error authenticating Google Token:', error);
@@ -24,13 +25,14 @@ const login = async () => {
     //     console.log("AUTH CODE", response)
     // })
 
-    const token = await googleTokenLogin().then((response) => {
-        console.log("ACCESS TOKEN 1: ", response)
+    const accessToken = await googleTokenLogin().then((response) => {
+        console.log("ACCESS TOKEN: ", response)
         return response;
     })
 
     try {
-        const response = await axios.post(`/proxy/api/v1/auth/google`, token);
+        // response.credential is basically idToken needed for google
+        const res = axios.post(`/proxy/api/v1/auth/google`, { "accessToken": accessToken });
     } catch (error) {
         console.error('Error authenticating Google Token:', error);
     }
@@ -40,6 +42,7 @@ const login = async () => {
 
 <template>
     <GoogleLogin :callback="callback" prompt client-id="592195124025-6g06a3tddd3fpu494rsrplopn83f7jb2.apps.googleusercontent.com" />
+    <GoogleLogin @click="login">Login via accessToken</GoogleLogin>
     <!-- <GoogleLogin> -->
         <!-- Adding a button here allow us to override button style but also hides google-styled default button -->
         <!-- <button @click="login">Login Using Google</button> -->
