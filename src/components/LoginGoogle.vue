@@ -42,10 +42,7 @@ const login = async () => {
 
 <template>
     <GoogleLogin :callback="callback" prompt client-id="592195124025-6g06a3tddd3fpu494rsrplopn83f7jb2.apps.googleusercontent.com" />
-    <GoogleLogin @click="login">Login via accessToken</GoogleLogin>
-    <!-- <GoogleLogin> -->
-        <!-- Adding a button here allow us to override button style but also hides google-styled default button -->
-        <!-- <button @click="login">Login Using Google</button> -->
-         <!-- GoogleLogin -->
-    <!-- </GoogleLogin> -->
+
+    <!-- uncoment bellow if want to send to backend accessToken instead idToken -->
+    <!-- <GoogleLogin @click="login">Login via accessToken</GoogleLogin> -->
 </template>
