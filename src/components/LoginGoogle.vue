@@ -1,11 +1,14 @@
 <script setup>
 import { GoogleLogin, decodeCredential, googleAuthCodeLogin, googleTokenLogin,  } from 'vue3-google-login';
 import axios from 'axios';
+import { useToast } from 'vue-toastification';
+import JSON5 from 'json5'
 
+const toast = useToast();
+let bearerAccessToken = "";
 
-const callback = (response) => {
-    // This callback will be triggered when the user selects or login to
-    // his Google account from the popup
+const callback = async (response) => {
+    // This callback will be triggered when the user selects or login to his Google account from the popup
     console.log("CREDENTIALS RESPONSE: ", response)
 
     // decodeCredential will retrive the JWT payload from the credential
@@ -14,7 +17,16 @@ const callback = (response) => {
 
     try {
         // response.credential is basically idToken needed for google
-        const res = axios.post(`/proxy/api/v1/auth/google`, { "idToken": response.credential });
+        const res = await axios.post(`/proxy/api/v1/auth/google`, { "idToken": response.credential });   // .then() unpacks promise to actual data
+        if ( res.status == '200' ) {
+            const accessToken = res.data.accessToken;
+            const accessTokenStr = JSON5.stringify(accessToken);
+            bearerAccessToken = "Bearer " + accessTokenStr.substring(1, accessTokenStr.length-1)   // remove single quotation marks from start end end
+            console.log( "Successfully retrieved access token: " + bearerAccessToken );
+            toast.success('Login Successful');
+        } else {
+            toast.error('Authentication failed - please wait for admin to activate your account');
+        }
     } catch (error) {
         console.error('Error authenticating Google Token:', error);
     }
