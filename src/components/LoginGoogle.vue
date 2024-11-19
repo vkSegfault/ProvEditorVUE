@@ -18,12 +18,19 @@ const callback = async (response) => {
     try {
         // response.credential is basically idToken needed for google
         const res = await axios.post(`/proxy/api/v1/auth/google`, { "idToken": response.credential });   // .then() unpacks promise to actual data
+
+        // handle case when user is created and activated by admin - we just fetch access token
         if ( res.status == '200' ) {
             const accessToken = res.data.accessToken;
+            console.log( accessToken );
             const accessTokenStr = JSON5.stringify(accessToken);
-            bearerAccessToken = "Bearer " + accessTokenStr.substring(1, accessTokenStr.length-1)   // remove single quotation marks from start end end
+            bearerAccessToken = "Bearer " + accessTokenStr.substring(1, accessTokenStr.length-1)   // remove single quotation marks from start and end
             console.log( "Successfully retrieved access token: " + bearerAccessToken );
             toast.success('Login Successful');
+        } 
+        // handle case when user is created but not activated by admin
+        else if ( res.status == '201' ) {
+            console.log("Confirmation mail has been sent to administrator");
         } else {
             toast.error('Authentication failed - please wait for admin to activate your account');
         }
