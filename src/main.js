@@ -10,6 +10,7 @@ import Toast from 'vue-toastification';
 import './css/toastcustom.scss'
 
 import vue3GoogleLogin from 'vue3-google-login'
+import OpenLayersMap from "vue3-openlayers";
 
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -28,5 +29,6 @@ app.use(PrimeVue, {
 app.use(vue3GoogleLogin, {
     clientId: '592195124025-6g06a3tddd3fpu494rsrplopn83f7jb2.apps.googleusercontent.com'
 })
+app.use(OpenLayersMap /*, options */);
 
 app.mount('#app')
