@@ -35,8 +35,8 @@ const isActiveLink = (routePath) => {
                   >Your Assets</RouterLink
                 >
                 <RouterLink
-                  to="/asset/add"
-                  :class="[isActiveLink('/asset/add') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
+                  to="/province/add"
+                  :class="[isActiveLink('/province/add') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
                   >Add Asset</RouterLink
                 >
                 <RouterLink

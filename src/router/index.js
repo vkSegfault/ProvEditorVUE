@@ -4,7 +4,7 @@ import LoginView from "@/views/LoginView.vue";
 import YourAssetsView from "@/views/YourAssetsView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 import OneAssetView from "@/views/OneAssetView.vue";
-import AddAssetView from "@/views/AddAssetView.vue";
+import AddProvinceView from "@/views/AddProvinceView.vue";
 import EditAssetView from "@/views/EditAssetView.vue";
 
 const router = createRouter({
@@ -32,19 +32,19 @@ const router = createRouter({
             component: OneAssetView
         },
         {
-            path: '/asset/add',
-            name: 'asset-add',
-            component: AddAssetView,
+            path: '/province/add',
+            name: 'province-add',
+            component: AddProvinceView,
             children: [
                 {
                     path: '',
-                    name: 'asset-add-generic',
-                    component: AddAssetView
+                    name: 'province-add-generic',
+                    component: AddProvinceView
                 },
                 {
                     path: ':type',
-                    name: 'asset-add-particular',
-                    component: AddAssetView
+                    name: 'province-add-particular',
+                    component: AddProvinceView
                 }
             ]
         },

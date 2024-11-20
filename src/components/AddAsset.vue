@@ -19,7 +19,7 @@ const form = reactive({
   // default type here - when we click add new particular type it should already be picked up and not provided once more
   type: stringType,
   name: '',
-  description: '',
+  notes: '',
   dateRange: null,
   value: 0,
   rate: 0,
@@ -35,7 +35,7 @@ const handleSubmit = async () => {
   const newBond = {
     name: form.name,
     type: form.type.toUpperCase(),
-    description: form.description,
+    notes: form.notes,
     value: form.value,
     rate: form.rate,
     days: form.days,
@@ -61,8 +61,7 @@ const handleSubmit = async () => {
 <template>
     <section class="text-center flex flex-col justify-center items-center h-96">
       <i class="pi pi-file-plus text-yellow-500 text-7xl mb-5" style="font-size: 5rem"></i>
-      <h1 class="text-6xl font-bold mb-4">Add here new asset...</h1>
-      <p class="text-xl mb-5">Plase add your asset</p>
+      <h1 class="text-6xl font-bold mb-4">Add new province...</h1>
       <RouterLink
         to="/"
         class="text-white bg-green-700 hover:bg-green-900 rounded-md px-3 py-2 mt-4"
@@ -76,11 +75,11 @@ const handleSubmit = async () => {
           class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0"
         >
           <form @submit.prevent="handleSubmit">
-            <h2 class="text-3xl text-center font-semibold mb-6">Add Asset</h2>
+            <h2 class="text-3xl text-center font-semibold mb-6">Add Province</h2>
 
             <div class="mb-4">
               <label for="type" class="block text-gray-700 font-bold mb-2"
-                >Asset Type</label
+                >Province Type</label
               >
               <!-- v-model binds form variable defined in <script /> with whataver value user pass to this form from website -->
               <select
@@ -90,20 +89,15 @@ const handleSubmit = async () => {
                 class="border rounded w-full py-2 px-3"
                 required
               >
-                <option value="Stock">Stock</option>
-                <option value="Deposit">Deposit</option>
-                <option value="Bond">Bond</option>
-                <option value="IKE">IKE</option>
-                <option value="PPK">PPK</option>
-                <option value="Mortgage">Mortgage</option>
-                <option value="Installment">Installment</option>
-                <option value="Loan">Loan</option>
+                <option value="Land">Land</option>
+                <option value="City">City</option>
+                <option value="Sea">Sea</option>
               </select>
             </div>
 
             <div class="mb-4">
               <label class="block text-gray-700 font-bold mb-2"
-                >Asset Name</label
+                >Province Name</label
               >
               <input
                 v-model="form.name"
@@ -111,7 +105,7 @@ const handleSubmit = async () => {
                 id="name"
                 name="name"
                 class="border rounded w-full py-2 px-3 mb-2"
-                placeholder="eg. My 2nd deposit"
+                placeholder="e.g.: Masovia"
                 required
               />
             </div>
@@ -120,15 +114,15 @@ const handleSubmit = async () => {
               <label
                 for="description"
                 class="block text-gray-700 font-bold mb-2"
-                >Description</label
+                >Notes</label
               >
               <textarea
                 v-model="form.description"
-                id="description"
-                name="description"
+                id="notes"
+                name="notes"
                 class="border rounded w-full py-2 px-3"
-                rows="4"
-                placeholder="Deposit for 10k PLN, saving for new car, please "
+                rows="3"
+                placeholder="Notes about province will be ignored by engine, it's just for editor"
               ></textarea>
             </div>
 
@@ -255,7 +249,7 @@ const handleSubmit = async () => {
                 class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
                 type="submit"
               >
-                Add Asset
+                Add Province
               </button>
             </div>
           </form>
