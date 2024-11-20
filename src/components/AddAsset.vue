@@ -124,7 +124,8 @@ const handleSubmit = async () => {
                 name="notes"
                 class="border rounded w-full py-2 px-3"
                 rows="3"
-                placeholder="Notes about province will be ignored by engine, it's just for editor"
+                placeholder="Add historical, geographical, political or any other useful info, 
+Notes about province will be ignored by engine"
               ></textarea>
             </div>
 

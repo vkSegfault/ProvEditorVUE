@@ -32,12 +32,12 @@ const isActiveLink = (routePath) => {
                 <RouterLink
                   to="/assets"
                   :class="[isActiveLink('/assets') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
-                  >Your Assets</RouterLink
+                  >Provinces</RouterLink
                 >
                 <RouterLink
                   to="/province/add"
                   :class="[isActiveLink('/province/add') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
-                  >Add Asset</RouterLink
+                  >Add Province</RouterLink
                 >
                 <RouterLink
                   to="/login"
