@@ -6,6 +6,8 @@ import axios from 'axios';
 import { useToast } from 'vue-toastification';
 import Calendar from 'primevue/calendar';
 import DatePicker from 'primevue/datepicker';
+import { Map, Layers, Sources } from "vue3-openlayers";
+import OpenLayerMap from './OpenLayerMap.vue';
 
 
 const route = useRoute()
@@ -117,13 +119,22 @@ const handleSubmit = async () => {
                 >Notes</label
               >
               <textarea
-                v-model="form.description"
+                v-model="form.notes"
                 id="notes"
                 name="notes"
                 class="border rounded w-full py-2 px-3"
                 rows="3"
                 placeholder="Notes about province will be ignored by engine, it's just for editor"
               ></textarea>
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="shape"
+                class="block text-gray-700 font-bold mb-2"
+                >Shape</label
+              >
+              <OpenLayerMap />
             </div>
 
             <div class="mb-4">
