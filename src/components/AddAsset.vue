@@ -6,8 +6,8 @@ import axios from 'axios';
 import { useToast } from 'vue-toastification';
 import Calendar from 'primevue/calendar';
 import DatePicker from 'primevue/datepicker';
-import { Map, Layers, Sources } from "vue3-openlayers";
 import OpenLayerMap from './OpenLayerMap.vue';
+
 
 
 const route = useRoute()
@@ -79,7 +79,7 @@ const handleSubmit = async () => {
           <form @submit.prevent="handleSubmit">
             <h2 class="text-3xl text-center font-semibold mb-6">Add Province</h2>
 
-            <div class="mb-4">
+            <div class=" mb-4">
               <label for="type" class="block text-gray-700 font-bold mb-2"
                 >Province Type</label
               >
