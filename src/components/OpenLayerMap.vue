@@ -51,10 +51,11 @@ const drawstart = (event) => {
 
 const drawend = (event: DrawEvent) => {
   // const zones = ref<Feature<Geometry>[]>([]);
-  const zones = ref<Feature | null>(null);
-  zones.value = event.feature;
+  // const zones = ref<Feature | null>(null);
+  // zones.value = event.feature;
 
-  console.log("DRAWNED POLYGON: " + zones.value.getGeometry() );
+  console.log("DRAWNED POLYGON: " + event.target.sketchCoords_ );
+  console.log(event);
 };
 </script>
 
