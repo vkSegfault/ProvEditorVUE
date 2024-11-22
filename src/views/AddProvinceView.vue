@@ -1,7 +1,7 @@
 <script setup>
-import AddAsset from '@/components/AddAsset.vue';
+import AddProvince from '@/components/AddProvince.vue';
 </script>
 
 <template>
-  <AddAsset />
+  <AddProvince />
 </template>
