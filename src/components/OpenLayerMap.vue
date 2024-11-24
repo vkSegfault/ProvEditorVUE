@@ -62,9 +62,14 @@ const drawend = (event: DrawEvent) => {
 <template>
 
   <form>
-    <fieldset>
-      <label for="checkbox">Draw Mode Enabled</label>
-      <input type="checkbox" id="checkbox" v-model="drawEnable" />
+    <fieldset class="flex items-center  mb-4">
+      <!-- class="w-5 h-5 appearance-none border cursor-pointer rounded-md border-gray-700 rounded-md mr-2 hover:border-green-500 hover:bg-green-100 checked:bg-no-repeat checked:bg-center checked:border-green-500 checked:bg-green-700" -->
+      <input 
+        type="checkbox"
+        id="checkbox"
+        class="checkbox appearance-none mr-2"
+        v-model="drawEnable">
+      <label for="checkbox" class="text-lg font-norma cursor-pointer text-gray-600">Draw Mode Enabled</label>
     </fieldset>
   </form>
 
@@ -142,5 +147,42 @@ const drawend = (event: DrawEvent) => {
   to {
     transform: rotate(360deg);
   }
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: #eee;
+  border: 3px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:hover {
+  border-color: #57cf5d;
+  color: #6eb35c;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18)!important;
+}
+
+/* Custom checkmark */
+input[type="checkbox"]:checked {
+  background: #4caf50;
+  border-color: #4caf50;
+  position: relative;
+}
+
+input[type="checkbox"]:checked::before {
+  content: "\2714"; /* Unicode heavy checkmark */
+  position: absolute;
+  top: 0px;
+  left: 2px;
+  width: 7px;
+  height: 7px;
+  color: white;
+  font-size: 22px;
+  padding: 0px 0px 0px 0px;
+  top: -34%;
+  left: -1%;
 }
 </style>
