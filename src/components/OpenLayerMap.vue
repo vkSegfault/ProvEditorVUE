@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide } from "vue";
+import { provide, defineExpose } from "vue";
 import { Map, Layers, Sources, type Vue3OpenlayersGlobalOptions } from "vue3-openlayers";
 import { ref, inject, onMounted } from "vue";
 import proj4 from "proj4";
@@ -9,12 +9,17 @@ import type { Geometry } from "ol/geom";
 import { GeoJSON } from "ol/format";
 import { type DrawEvent } from "ol/interaction/Draw";
 
-
 const options: Vue3OpenlayersGlobalOptions = {
   debug: false,
 };
 provide("ol-options", options);
 
+
+const polygon = ref([]);
+
+defineExpose({
+  polygon,
+});
 
 
 // Convert from Equirectangular projection to Spherical Mercator projection (Google web map)
@@ -50,12 +55,13 @@ const drawstart = (event) => {
 };
 
 const drawend = (event: DrawEvent) => {
-  // const zones = ref<Feature<Geometry>[]>([]);
-  // const zones = ref<Feature | null>(null);
-  // zones.value = event.feature;
-
-  console.log("DRAWNED POLYGON: " + event.target.sketchCoords_ );
+  console.log( "DRAWNED POLYGON: " + event.target.sketchCoords_[0] );
+  // we use [0] index because we can draw more than one polygon at once (we won't but need to index it nonetheles) 
+  event.target.sketchCoords_[0].forEach(coord => {
+    polygon.value.push(coord);
+  });
   console.log(event);
+  console.log(polygon);
 };
 </script>
 

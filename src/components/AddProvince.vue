@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, useRoute  } from 'vue-router';
-import { reactive } from 'vue';
+import { reactive, ref, computed } from 'vue';
 import router from '@/router';
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
@@ -14,6 +14,10 @@ const route = useRoute()
 const type = route.params.type ? route.params.type.toLowerCase() : '';
 const stringType = type.charAt(0).toUpperCase() + type.slice(1);
 // console.log(route.params)
+
+
+// we take it from child component OpenLayerMap.vue
+const childPolygonArray = ref(null);
 
 
 // eveything from submit form will be coppied to below object
@@ -58,6 +62,12 @@ const handleSubmit = async () => {
   }
 
 };
+
+const onSaveShape = () => {  
+  console.log( childPolygonArray.value.polygon );
+  console.log("Polygon [PARENT COMPONENT]" + childPolygonArray.value);
+  return childPolygonArray.value;
+}; 
 </script>
 
 <template>
@@ -150,7 +160,19 @@ Notes about province will be ignored by engine"
                 class="block text-gray-700 font-bold mb-2"
                 >Shape</label
               >
-              <OpenLayerMap />
+              <OpenLayerMap ref="childPolygonArray"/>
+              <!-- <p> {{ polygonArray.value }} </p> -->
+              <div class="btn"> 
+                <button type="button" @click="onSaveShape">Save Shape</button>
+              </div>
+              <div>
+              <button
+                class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                type="button" @click="onSaveShape"
+              >
+                Save Shape
+              </button>
+            </div>
             </div>
 
             <h3 class="text-2xl mb-5">Details</h3>
