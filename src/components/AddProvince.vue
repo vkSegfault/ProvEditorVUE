@@ -17,7 +17,7 @@ const stringType = type.charAt(0).toUpperCase() + type.slice(1);
 
 
 // we take it from child component OpenLayerMap.vue
-const childPolygonArray = ref(null);
+const childPolygonArray = ref([]);
 
 
 // eveything from submit form will be coppied to below object
@@ -63,11 +63,10 @@ const handleSubmit = async () => {
 
 };
 
-const onSaveShape = () => {  
+const onSaveShape = () => {
   console.log( childPolygonArray.value.polygon );
-  console.log("Polygon [PARENT COMPONENT]" + childPolygonArray.value);
-  return childPolygonArray.value;
-}; 
+  console.log("Polygon [PARENT COMPONENT]" + childPolygonArray.value.polygon);
+};
 </script>
 
 <template>
@@ -161,17 +160,13 @@ Notes about province will be ignored by engine"
                 >Shape</label
               >
               <OpenLayerMap ref="childPolygonArray"/>
-              <!-- <p> {{ polygonArray.value }} </p> -->
-              <div class="btn"> 
-                <button type="button" @click="onSaveShape">Save Shape</button>
-              </div>
               <div>
-              <button
-                class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
-                type="button" @click="onSaveShape"
-              >
+                <button
+                  class="my-2 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                  type="button" @click="onSaveShape"
+                >
                 Save Shape
-              </button>
+                </button>
             </div>
             </div>
 

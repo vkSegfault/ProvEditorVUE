@@ -1,4 +1,5 @@
 import './assets/main.css';
+
 import router from './router/index.js';  // auto loads index.js from 'router' dir
 
 import 'primeicons/primeicons.css';
