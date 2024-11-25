@@ -3,7 +3,10 @@ import { GoogleLogin, decodeCredential, googleAuthCodeLogin, googleTokenLogin,  
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
 import JSON5 from 'json5'
+import { useStore } from 'vuex';
+import router from '@/router';
 
+const store = useStore();
 const toast = useToast();
 let bearerAccessToken = "";
 
@@ -27,7 +30,13 @@ const callback = async (response) => {
             bearerAccessToken = "Bearer " + accessTokenStr.substring(1, accessTokenStr.length-1)   // remove single quotation marks from start and end
             console.log( "Successfully retrieved access token: " + bearerAccessToken );
             toast.success('Login Successful');
-        } 
+            console.log(store.state.logged_in);
+            store.commit('login');
+            console.log(store.state.logged_in);
+            store.commit('logout');
+            console.log(store.state.logged_in);
+            router.push(`/assets`);
+        }
         // handle case when user is created but not activated by admin
         else if ( res.status == '201' ) {
             console.log("Confirmation mail has been sent to administrator");

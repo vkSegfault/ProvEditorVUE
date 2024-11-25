@@ -14,10 +14,28 @@ import vue3GoogleLogin from 'vue3-google-login'
 import OpenLayersMap from "vue3-openlayers";
 
 import { createApp } from 'vue'
+import { createStore } from 'vuex';
 import App from './App.vue'
+
+const store = createStore({
+    state() {
+        return {
+            logged_in: false
+        }
+    },
+    mutations: {
+        login (state) {
+            state.logged_in = true
+        },
+        logout (state) {
+            state.logged_in = false
+        }
+    }
+})
 
 const app = createApp(App)
 
+app.use(store)
 app.use(router);
 app.use(Toast, {
     position: "top-center",
