@@ -181,60 +181,45 @@ Notes about province will be ignored by engine"
             <h3 class="text-2xl mb-5">Details</h3>
 
             <div class="mb-4">
-              <label for="company" class="block text-gray-700 font-bold mb-2"
-                >Company Name</label
+              <label for="population" class="block text-gray-700 font-bold mb-2"
+                >Population</label
               >
               <input
-                type="text"
-                id="company"
-                name="company"
+                type="number"
+                id="population"
+                name="population"
                 class="border rounded w-full py-2 px-3"
-                placeholder="Company Name"
+                placeholder=314000
               />
             </div>
 
             <div class="mb-4">
               <label
-                for="company_description"
+                for="resources"
                 class="block text-gray-700 font-bold mb-2"
-                >Company Description</label
-              >
-              <textarea
-                id="company_description"
-                name="company_description"
-                class="border rounded w-full py-2 px-3"
-                rows="4"
-                placeholder="What does your company do?"
-              ></textarea>
-            </div>
-
-            <div class="mb-4">
-              <label
-                for="contact_email"
-                class="block text-gray-700 font-bold mb-2"
-                >Contact Email</label
+                >Resources</label
               >
               <input
-                type="email"
-                id="contact_email"
-                name="contact_email"
+                type="text"
+                id="resources"
+                name="resources"
                 class="border rounded w-full py-2 px-3"
-                placeholder="Email address for applicants"
+                placeholder="List of resources the province has e.g.: coal, copper, gas, uranium..."
                 required
               />
             </div>
             <div class="mb-4">
               <label
-                for="contact_phone"
+                for="infrastructure"
                 class="block text-gray-700 font-bold mb-2"
-                >Contact Phone</label
+                >Infrastructure</label
               >
               <input
-                type="tel"
-                id="contact_phone"
-                name="contact_phone"
+                type="text"
+                id="infrastructure"
+                name="infrastructure"
                 class="border rounded w-full py-2 px-3"
-                placeholder="Optional phone for applicants"
+                placeholder="List of infrastructure buildings the province has, e.g.: airport, nuclear plant, expressway..."
               />
             </div>
 
