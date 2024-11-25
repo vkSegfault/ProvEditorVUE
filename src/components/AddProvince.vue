@@ -159,15 +159,23 @@ Notes about province will be ignored by engine"
                 class="block text-gray-700 font-bold mb-2"
                 >Shape</label
               >
+
               <OpenLayerMap ref="childPolygonArray"/>
-              <div>
-                <button
-                  class="my-2 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
-                  type="button" @click="onSaveShape"
-                >
-                Save Shape
-                </button>
-            </div>
+
+              <div class="flex text-center justify-center items-center">
+                <div class="block group relative">
+                  <button
+                    class="my-2 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                    type="button" @click="onSaveShape"
+                  >
+                  Save Shape
+                  </button>
+                  <!-- tooltipCustom is custom set of Tailwind classes packed in ./assets/main.css -->
+                  <div class="tooltipCustom my-1">
+                    <p>Save it now?</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <h3 class="text-2xl mb-5">Details</h3>
