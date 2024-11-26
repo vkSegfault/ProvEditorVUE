@@ -36,9 +36,10 @@ const callback = async (response) => {
             // console.log(store.state.logged_in);
             router.push(`/assets`);
         }
-        // handle case when user is created but not activated by admin
+        // handle case when user is created but not activated by admin (registration or first SSO login)
         else if ( res.status == '201' ) {
             console.log("Confirmation mail has been sent to administrator");
+            router.push('/confirmmail');
         } else {
             toast.error('Authentication failed - please wait for admin to activate your account');
         }

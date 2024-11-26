@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
+import ConfirmMailView from "@/views/ConfirmMailView.vue";
 import YourAssetsView from "@/views/YourAssetsView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 import OneAssetView from "@/views/OneAssetView.vue";
@@ -20,6 +21,11 @@ const router = createRouter({
             path: '/login',
             name: 'login',
             component: LoginView
+        },
+        {
+            path: '/confirmmail',
+            name: 'confirmmail',
+            component: ConfirmMailView
         },
         {
             path: '/assets',
