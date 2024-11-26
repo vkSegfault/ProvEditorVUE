@@ -2,13 +2,22 @@
 import logo from '@/assets/logo.svg'
 import { RouterLink, useRoute } from 'vue-router';
 import { useStore } from 'vuex';
+import router from '@/router';
+import { useToast } from 'vue-toastification';
+
+const store = useStore();
+const toast = useToast();
 
 const isActiveLink = (routePath) => {
   const route = useRoute();
   return route.path === routePath;
 }
 
-const store = useStore();
+const logout = () => {
+  store.commit('logout');
+  toast.info('Logout Successful');
+  router.push("/");
+}
 
 </script>
 
@@ -58,13 +67,12 @@ const store = useStore();
                   :class="[isActiveLink('/province/add') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
                   >Add Province</RouterLink
                 >
-                <RouterLink
-                  to="/login"
+                <div @click="logout"
                   :class="[isActiveLink('/login') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
                   >
                   <i class="pi pi-user text-yellow-500"></i>
                   Logout
-                </RouterLink
+                </div
                 >
               </div>
             </div>
