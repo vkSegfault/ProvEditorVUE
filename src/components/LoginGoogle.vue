@@ -32,8 +32,8 @@ const callback = async (response) => {
             toast.success('Login Successful');
             store.commit('login');
             console.log("User logged in: " + store.state.logged_in);
-            // store.commit('logout');
-            // console.log(store.state.logged_in);
+            store.commit('set_acccess_token', bearerAccessToken);
+            console.log("Access token stored in Vuex Store: " + store.state.access_token);
             router.push(`/assets`);
         }
         // handle case when user is created but not activated by admin (registration or first SSO login)

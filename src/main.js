@@ -20,7 +20,8 @@ import App from './App.vue'
 const store = createStore({
     state() {
         return {
-            logged_in: false
+            logged_in: false,
+            access_token: ""
         }
     },
     mutations: {
@@ -29,6 +30,9 @@ const store = createStore({
         },
         logout (state) {
             state.logged_in = false
+        },
+        set_acccess_token(state, token) {
+            state.access_token = token
         }
     }
 })
