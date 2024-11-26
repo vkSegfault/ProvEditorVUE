@@ -1,11 +1,15 @@
 <script setup>
 import logo from '@/assets/logo.svg'
 import { RouterLink, useRoute } from 'vue-router';
+import { useStore } from 'vuex';
 
 const isActiveLink = (routePath) => {
   const route = useRoute();
   return route.path === routePath;
 }
+
+const store = useStore();
+
 </script>
 
 <template>
@@ -23,7 +27,22 @@ const isActiveLink = (routePath) => {
               >
             </RouterLink>
             <div class="md:ml-auto">
-              <div class="flex space-x-2">
+              <div v-if="store.state.logged_in == false" class="flex space-x-2">
+                <RouterLink
+                  to="/"
+                  :class="[isActiveLink('/') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
+                  >Home</RouterLink
+                >
+                <RouterLink
+                  to="/login"
+                  :class="[isActiveLink('/login') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
+                  >
+                  <i class="pi pi-user text-yellow-500"></i>
+                  Login
+                </RouterLink
+                >
+              </div>
+              <div v-else class="flex space-x-2">
                 <RouterLink
                   to="/"
                   :class="[isActiveLink('/') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
@@ -44,7 +63,7 @@ const isActiveLink = (routePath) => {
                   :class="[isActiveLink('/login') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
                   >
                   <i class="pi pi-user text-yellow-500"></i>
-                  Login
+                  Logout
                 </RouterLink
                 >
               </div>

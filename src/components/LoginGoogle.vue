@@ -30,11 +30,10 @@ const callback = async (response) => {
             bearerAccessToken = "Bearer " + accessTokenStr.substring(1, accessTokenStr.length-1)   // remove single quotation marks from start and end
             console.log( "Successfully retrieved access token: " + bearerAccessToken );
             toast.success('Login Successful');
-            console.log(store.state.logged_in);
             store.commit('login');
-            console.log(store.state.logged_in);
-            store.commit('logout');
-            console.log(store.state.logged_in);
+            console.log("User logged in: " + store.state.logged_in);
+            // store.commit('logout');
+            // console.log(store.state.logged_in);
             router.push(`/assets`);
         }
         // handle case when user is created but not activated by admin
