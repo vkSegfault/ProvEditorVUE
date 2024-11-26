@@ -4,6 +4,6 @@ import LoginGoogle from '@/components/LoginGoogle.vue';
 </script>
 
 <template>
-    <Login></Login>
+    <Login />
     <LoginGoogle />
 </template>

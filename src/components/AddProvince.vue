@@ -222,6 +222,20 @@ Notes about province will be ignored by engine"
                 placeholder="List of infrastructure buildings the province has, e.g.: airport, nuclear plant, expressway..."
               />
             </div>
+            <div class="mb-4">
+              <label
+                for="terrain"
+                class="block text-gray-700 font-bold mb-2"
+                >Terrain</label
+              >
+              <input
+                type="text"
+                id="terrain"
+                name="terrain"
+                class="border rounded w-full py-2 px-3"
+                placeholder="Terrain type, e.g.: plains, mountains, desert, jungle..."
+              />
+            </div>
 
             <div>
               <button
