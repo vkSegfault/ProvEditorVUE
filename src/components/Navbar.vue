@@ -4,6 +4,7 @@ import { RouterLink, useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import router from '@/router';
 import { useToast } from 'vue-toastification';
+import 'floating-vue/dist/style.css'
 
 const store = useStore();
 const toast = useToast();
@@ -50,6 +51,68 @@ const logout = () => {
                   Login
                 </RouterLink
                 >
+                <VMenu :distance="34" class="px-3 py-2">
+                  <RouterLink
+                    to="/login"
+                    :class="[isActiveLink('/login') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
+                    >
+                    <i class="pi pi-user text-yellow-500"></i>
+                    Login
+                  </RouterLink
+                  >
+
+                  <template #popper>
+                    <div class="flex flex-col">
+
+                      <RouterLink
+                        to="/login"
+                        :class="[isActiveLink('/login') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
+                        >
+                        <i class="pi pi-user text-yellow-500"></i>
+                        Login
+                      </RouterLink>
+                      
+                      <RouterLink
+                        to="/register"
+                        :class="[isActiveLink('/login') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
+                        >
+                        <i class="pi pi-user text-yellow-500"></i>
+                        Register
+                      </RouterLink>
+
+                    </div>
+                  </template>
+                </VMenu>
+
+                <!-- <VDropdown :distance="34" :triggers="['click']">
+                  <button :class="[isActiveLink('/login') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']">
+                    <i class="pi pi-user text-yellow-500"></i>
+                    Login / Register
+                  </button>
+
+                  <template #popper>
+                    <div class="flex flex-col">
+
+                      <RouterLink
+                        to="/login"
+                        :class="[isActiveLink('/login') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
+                        >
+                        <i class="pi pi-user text-yellow-500"></i>
+                        Login
+                      </RouterLink>
+
+                      <RouterLink
+                        to="/login"
+                        :class="[isActiveLink('/login') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
+                        >
+                        <i class="pi pi-user text-yellow-500"></i>
+                        Register
+                      </RouterLink>
+
+                    </div>
+                  </template>
+                </VDropdown> -->
+
               </div>
               <div v-else class="flex space-x-2">
                 <RouterLink
@@ -81,3 +144,9 @@ const logout = () => {
       </div>
     </nav>
 </template>
+
+<style scoped>
+.VDropdown {
+
+}
+</style>
