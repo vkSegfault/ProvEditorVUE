@@ -3,7 +3,7 @@ import HomeView from "@/views/HomeView.vue";
 import RegisterView from "@/views/RegisterView.vue";
 import LoginView from "@/views/LoginView.vue";
 import ConfirmMailView from "@/views/ConfirmMailView.vue";
-import YourAssetsView from "@/views/YourAssetsView.vue";
+import ProvinceListView from "@/views/ProvinceListView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 import OneAssetView from "@/views/OneAssetView.vue";
 import AddProvinceView from "@/views/AddProvinceView.vue";
@@ -34,9 +34,9 @@ const router = createRouter({
             component: ConfirmMailView
         },
         {
-            path: '/assets',
-            name: 'assets',
-            component: YourAssetsView
+            path: '/provinces',
+            name: 'provinces',
+            component: ProvinceListView
         },
         {
             path: '/asset/:type/:id',

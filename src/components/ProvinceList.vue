@@ -47,7 +47,7 @@ const viewAllAssets = async () => {
     <section class="bg-blue-50 px-4 py-10">
         <div class="container-xl lg:container m-auto">
             <h2 class="text-3xl font-bold text-green-500 mb-6 text-center">
-                Browse Assets
+                Browse Provinces
             </h2>
 
             <!-- Show loading spinner while state.isLoading is true -->
@@ -68,7 +68,7 @@ const viewAllAssets = async () => {
     <section v-if="state.showButton">
         <button @click="viewAllAssets"
             class="m-auto min-w-80 max-w-lg my-10 px-6 block bg-black text-white text-center py-4 px-6 rounded-xl hover:bg-gray-700"
-            >View All Assets
+            >View All Provinces
         </button>
       <!-- <RouterLink
         to="/assets"

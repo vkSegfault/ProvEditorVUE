@@ -25,18 +25,7 @@ const handleSubmit = async () => {
 
 
     try {
-        // console.log( form.type.toUpperCase() )
-        // console.log( newBond )
-        //     curl -X 'POST' \
-        //   'http://localhost:5077/login?useCookies=true' \
-        //   -H 'accept: application/json' \
-        //   -H 'Content-Type: application/json' \
-        //   -d '{
-        //   "email": "adtofaust@gmail.com",
-        //   "password": "DupaMamuta1!",
-        //   "twoFactorCode": "string",
-        //   "twoFactorRecoveryCode": "string"
-        // }'
+        
         const response = await axios.post(
             '/proxy/register',
             {

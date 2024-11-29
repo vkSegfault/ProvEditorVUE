@@ -34,7 +34,7 @@ const callback = async (response) => {
             console.log("User logged in: " + store.state.logged_in);
             store.commit('set_acccess_token', bearerAccessToken);
             console.log("Access token stored in Vuex Store: " + store.state.access_token);
-            router.push(`/assets`);
+            router.push(`/provinces`);
         }
         // handle case when user is created but not activated by admin (registration or first SSO login)
         else if ( res.status == '201' ) {

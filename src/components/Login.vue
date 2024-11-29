@@ -57,7 +57,7 @@ const handleSubmit = async () => {
     console.log(response)
     console.log( `${form.dateRange}` );
     toast.success('Login successful...');
-    router.push(`/assets`);
+    router.push(`/provinces`);
   } catch (error) {
     console.error('Error:', error);
     toast.error('Wrong credentials...');
