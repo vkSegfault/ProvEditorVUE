@@ -25,7 +25,7 @@ const state = reactive({
 
 onMounted(async () => {
     try {
-        const response = await axios.get('/proxy/api/v1/Province');
+        const response = await axios.get('/proxy/api/v1/province');
         console.log(response)
         state.assets = response.data;
     } catch (error) {
