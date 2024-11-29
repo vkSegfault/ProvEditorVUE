@@ -43,14 +43,14 @@ const logout = () => {
                   :class="[isActiveLink('/') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
                   >Home</RouterLink
                 >
-                <RouterLink
+                <!-- <RouterLink
                   to="/login"
                   :class="[isActiveLink('/login') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
                   >
                   <i class="pi pi-user text-yellow-500"></i>
                   Login
                 </RouterLink
-                >
+                > -->
                 <VMenu :distance="34" class="px-3 py-2">
                   <RouterLink
                     to="/login"
@@ -62,21 +62,21 @@ const logout = () => {
                   >
 
                   <template #popper>
-                    <div class="flex flex-col">
+                    <div class="flex flex-col h-20 items-center justify-between md:items-stretch md:justify-start bg-opacity-50">
 
                       <RouterLink
                         to="/login"
-                        :class="[isActiveLink('/login') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
+                        :class="[isActiveLink('/login') ? 'bg-green-900' : 'bg-green-700', 'bg-opacity-80', 'hover:bg-green-800', 'hover:text-white', 'text-white', 'px-10', 'py-2', 'rounded-md']"
                         >
-                        <i class="pi pi-user text-yellow-500"></i>
+                        <i class="pi pi-sign-in text-yellow-500"></i>
                         Login
                       </RouterLink>
                       
                       <RouterLink
                         to="/register"
-                        :class="[isActiveLink('/login') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
+                        :class="[isActiveLink('/login') ? 'bg-green-900' : 'bg-green-700', 'bg-opacity-80', 'hover:bg-green-800',  'hover:text-white', 'text-white', 'px-10', 'py-2', 'rounded-md']"
                         >
-                        <i class="pi pi-user text-yellow-500"></i>
+                        <i class="pi pi-user-plus text-yellow-500"></i>
                         Register
                       </RouterLink>
 
@@ -130,12 +130,13 @@ const logout = () => {
                   :class="[isActiveLink('/province/add') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
                   >Add Province</RouterLink
                 >
-                <div @click="logout"
-                  :class="[isActiveLink('/login') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
+                <RouterLink @click="logout"
+                  to="/"
+                  :class="['hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
                   >
                   <i class="pi pi-user text-yellow-500"></i>
                   Logout
-                </div
+                </RouterLink
                 >
               </div>
             </div>
@@ -144,9 +145,3 @@ const logout = () => {
       </div>
     </nav>
 </template>
-
-<style scoped>
-.VDropdown {
-
-}
-</style>
