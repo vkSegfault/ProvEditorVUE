@@ -62,6 +62,7 @@ const drawend = (event: DrawEvent) => {
   });
   console.log(event);
   console.log(polygon);
+  drawEnable.value = false;
 };
 </script>
 
@@ -105,6 +106,7 @@ const drawend = (event: DrawEvent) => {
           @drawend="drawend"
           @drawstart="drawstart"
         >
+          <!-- STYLE WHILE DRAWING -->
           <ol-style>
             <ol-style-stroke color="blue" :width="2"></ol-style-stroke>
             <ol-style-fill color="rgba(255, 255, 0, 0.4)"></ol-style-fill>
@@ -114,9 +116,12 @@ const drawend = (event: DrawEvent) => {
             </ol-style-circle>
           </ol-style>
         </ol-interaction-draw>
+        
         <ol-interaction-modify v-if="drawEnable" />
+
       </ol-source-vector>
 
+      <!-- STYLE AFTER POLYGON IS DRAWN -->
       <ol-style>
         <ol-style-stroke color="red" :width="2"></ol-style-stroke>
         <ol-style-fill color="rgba(255,210,210,0.5)"></ol-style-fill>
