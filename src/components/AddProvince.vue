@@ -65,7 +65,7 @@ const handleSubmit = async () => {
 
 const onSaveShape = () => {
   console.log( childPolygonArray.value.polygon );
-  console.log("Polygon [PARENT COMPONENT]" + childPolygonArray.value.polygon);
+  console.log( "Polygon [PARENT COMPONENT]" + childPolygonArray.value.polygon );
 };
 </script>
 

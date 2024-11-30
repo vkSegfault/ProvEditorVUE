@@ -101,6 +101,7 @@ const drawend = (event: DrawEvent) => {
         <ol-interaction-draw
           v-if="drawEnable"
           :type="drawType"
+          :stopClick="true"
           @drawend="drawend"
           @drawstart="drawstart"
         >
@@ -113,11 +114,12 @@ const drawend = (event: DrawEvent) => {
             </ol-style-circle>
           </ol-style>
         </ol-interaction-draw>
+        <ol-interaction-modify />
       </ol-source-vector>
 
       <ol-style>
         <ol-style-stroke color="red" :width="2"></ol-style-stroke>
-        <ol-style-fill color="rgba(255,255,255,0.1)"></ol-style-fill>
+        <ol-style-fill color="rgba(255,210,210,0.5)"></ol-style-fill>
         <ol-style-circle :radius="7">
           <ol-style-fill color="red"></ol-style-fill>
         </ol-style-circle>
