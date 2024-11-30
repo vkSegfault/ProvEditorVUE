@@ -114,7 +114,7 @@ const drawend = (event: DrawEvent) => {
             </ol-style-circle>
           </ol-style>
         </ol-interaction-draw>
-        <ol-interaction-modify />
+        <ol-interaction-modify v-if="drawEnable" />
       </ol-source-vector>
 
       <ol-style>
