@@ -48,21 +48,67 @@ const strokeColor = ref("red");
 
 const format = inject('ol-format');
 
-const geoJson = new format.GeoJSON();
+// this object will hold all coords of our Polygons - we use some global one (via Vuex Store) and save each one in them
+const geojsonObject = {
+  type: "FeatureCollection",
+  crs: {
+    type: "name",
+    properties: {
+      name: "EPSG:3857",
+    },
+  },
+  features: [
+    {
+      type: "Feature",
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [1367410.699338904, 5580425.463847231],
+            [4130147.645083284, 6729414.193619426],
+            [1845080.1712666703,8097872.680763839],
+            [-736916.974288825,7207083.665547193],
+          ],
+        ],
+      },
+    },
+    {
+      type: "Feature",
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [-103.85636392303468, 38.10970692739486],
+            [-103.86770698495866, 33.218572724914544],
+            [-98.20654544301988, 33.6532810221672],
+            [-98.4408283538437, 38.31894739375114],
+            [-103.85636392303468, 38.10970692739486],
+          ],
+        ],
+      },
+    },
+  ],
+};
+const zones = ref<Feature<Geometry>[]>([]);
+zones.value = new GeoJSON().readFeatures(geojsonObject);
 
 const drawstart = (event) => {
   console.log("DRAW START: " + event);
 };
 
 const drawend = (event: DrawEvent) => {
-  console.log( "DRAWNED POLYGON: " + event.target.sketchCoords_[0] );
-  // we use [0] index because we can draw more than one polygon at once (we won't but need to index it nonetheles) 
   event.target.sketchCoords_[0].forEach(coord => {
     polygon.value.push(coord);
   });
+  zones.value.push(event.feature);
+  drawEnable.value = false;
+  
+  
+  // we use [0] index because we can draw more than one polygon at once (we won't but need to index it nonetheles) 
+  console.log( "DRAWNED POLYGON: " + event.target.sketchCoords_[0] );
   console.log(event);
   console.log(polygon);
-  drawEnable.value = false;
+  console.log(zones.value);
 };
 </script>
 
@@ -98,7 +144,7 @@ const drawend = (event: DrawEvent) => {
     </ol-tile-layer>
 
     <ol-vector-layer>
-      <ol-source-vector :projection="projection">
+      <ol-source-vector :projection="projection" :features="zones">
         <ol-interaction-draw
           v-if="drawEnable"
           :type="drawType"

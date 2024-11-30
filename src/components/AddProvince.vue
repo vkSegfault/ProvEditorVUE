@@ -65,7 +65,7 @@ const handleSubmit = async () => {
 
 const onSaveShape = () => {
   console.log( childPolygonArray.value.polygon );
-  console.log( "Polygon [PARENT COMPONENT]" + childPolygonArray.value.polygon );
+  console.log( "Polygon [VIEWED VIA PARENT COMPONENT]" + childPolygonArray.value.polygon );
 };
 </script>
 
@@ -164,18 +164,22 @@ Notes about province will be ignored by engine"
 
               <div class="flex text-center justify-center items-center">
                 <div class="block group relative">
+
                   <button
                     class="my-2 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
                     type="button" @click="onSaveShape"
                   >
-                  Save Shape
+                  Erase Shape
                   </button>
+
                   <!-- tooltipCustom is custom set of Tailwind classes packed in ./assets/main.css -->
                   <div class="tooltipCustom my-1">
-                    <p>Save it now?</p>
+                    <p>Clear off polygon?</p>
                   </div>
+
                 </div>
               </div>
+
             </div>
 
             <h3 class="text-2xl mb-5">Details</h3>
