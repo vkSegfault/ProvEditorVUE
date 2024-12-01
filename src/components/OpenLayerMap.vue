@@ -108,13 +108,23 @@ const geojsonObject = {
 };
 const zones = ref<Feature<Geometry>[]>([]);
 zones.value = new GeoJSON().readFeatures(geojsonObject);
+const hoveredFeatures = ref(new Collection());
 const selectedFeatures = ref(new Collection());
 const selectConditions = inject("ol-selectconditions");
-// TODO - implemennt both pointerMove (aka Hover) and Click conditions
-// const selectCondition = selectConditions.pointerMove;
-const selectCondition = selectConditions.click;
+// TODO - implemennt both pointerMove (aka Hover) and Click conditions - we probably juist need to copy 
+const selectHoverCondition = selectConditions.pointerMove;
+const selectClickCondition = selectConditions.click;
+
+const featureHovered = (event) => {
+  console.log('HOVERED');
+  hoveredFeatures.value = event.target.getFeatures();
+
+  console.log( 'Province Hovered: ' );
+  console.log(event);
+};
 
 const featureSelected = (event) => {
+  console.log('SELECTED');
   selectedFeatures.value = event.target.getFeatures();
 
   console.log( 'Province Selected: ' );
@@ -130,14 +140,15 @@ const drawstart = (event) => {
 };
 
 const drawend = (event: DrawEvent) => {
+  console.log('DRAWNED');
   event.target.sketchCoords_[0].forEach(coord => {
     polygon.value.push(coord);
   });
 
   // ADD polygon (aka Feature) to polygon list
   zones.value.push(event.feature);
-  // ADD selected polygon to selected polygon list
-  selectedFeatures.value.push(event.feature);
+  // ADD newly drawn polygon to selected polygon list (== click it just after drawing it)
+  // selectedFeatures.value.push(event.feature);
 
   drawEnable.value = false;
   
@@ -184,15 +195,29 @@ const drawend = (event: DrawEvent) => {
       <ol-source-osm />
     </ol-tile-layer>
 
-    <!-- :filter="selectInteactionFilter" -->
+    <!--       :filter="selectInteactionFilter" -->
+    <ol-interaction-select 
+      v-if="!drawEnable"
+      @select="featureHovered"
+      :condition="selectHoverCondition"
+      :features="hoveredFeatures"
+    >
+      <ol-style>
+        <ol-style-stroke color="red" :width="3" />
+        <ol-style-fill color="rgba(255, 0, 0, 0.4)" />
+        <ol-style-icon :src="markerIcon" :scale="0.05"></ol-style-icon>
+      </ol-style>
+    </ol-interaction-select>
+
     <ol-interaction-select
+      v-if="!drawEnable"
       @select="featureSelected"
-      :condition="selectCondition"
+      :condition="selectClickCondition"
       :features="selectedFeatures"
     >
       <ol-style>
         <ol-style-stroke color="red" :width="4" />
-        <ol-style-fill color="rgba(255, 0, 0, 0.4)" />
+        <ol-style-fill color="rgba(255, 0, 0, 0.5)" />
         <ol-style-icon :src="markerIcon" :scale="0.05"></ol-style-icon>
       </ol-style>
     </ol-interaction-select>
@@ -208,7 +233,7 @@ const drawend = (event: DrawEvent) => {
         >
           <!-- STYLE WHILE DRAWING -->
           <ol-style>
-            <ol-style-stroke color="blue" :width="2"></ol-style-stroke>
+            <ol-style-stroke color="blue" :width="10"></ol-style-stroke>
             <ol-style-fill color="rgba(255, 255, 0, 0.4)"></ol-style-fill>
             <ol-style-circle :radius="5">
               <ol-style-fill color="#00dd11" />
