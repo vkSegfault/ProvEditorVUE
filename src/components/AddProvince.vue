@@ -18,8 +18,12 @@ const stringType = type.charAt(0).toUpperCase() + type.slice(1);
 
 // this variable is stand-in for everything exposes via defineExpose() in from OpenLayerMap.vue
 const childComponent = ref(null);
-
-
+// we use key change to rerender OpenLayerMap component upon erase so that not saved polygon will be replaced 
+const componentKey = ref(0);
+const forceRerender = () => {
+  console.log("Component re-rendered");
+  componentKey.value += 1;
+};
 
 // eveything from submit form will be coppied to below object
 const form = reactive({
@@ -69,6 +73,7 @@ const onEraseShape = () => {
   console.log( "Polygon [VIEWED VIA PARENT COMPONENT]" + childComponent.value.polygon );
 
   childComponent.value.erase();
+  forceRerender();
 };
 </script>
 
@@ -163,7 +168,7 @@ Notes about province will be ignored by engine"
                 >Shape</label
               >
 
-              <OpenLayerMap ref="childComponent"/>
+              <OpenLayerMap ref="childComponent" :key="componentKey" />
 
               <div class="flex text-center justify-center items-center">
                 <div class="block group relative">
