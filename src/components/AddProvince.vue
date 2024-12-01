@@ -16,8 +16,9 @@ const stringType = type.charAt(0).toUpperCase() + type.slice(1);
 // console.log(route.params)
 
 
-// we take it from child component OpenLayerMap.vue
-const childPolygonArray = ref([]);
+// this variable is stand-in for everything exposes via defineExpose() in from OpenLayerMap.vue
+const childComponent = ref(null);
+
 
 
 // eveything from submit form will be coppied to below object
@@ -63,9 +64,11 @@ const handleSubmit = async () => {
 
 };
 
-const onSaveShape = () => {
-  console.log( childPolygonArray.value.polygon );
-  console.log( "Polygon [VIEWED VIA PARENT COMPONENT]" + childPolygonArray.value.polygon );
+const onEraseShape = () => {
+  console.log( childComponent.value.polygon );
+  console.log( "Polygon [VIEWED VIA PARENT COMPONENT]" + childComponent.value.polygon );
+
+  childComponent.value.erase();
 };
 </script>
 
@@ -160,14 +163,14 @@ Notes about province will be ignored by engine"
                 >Shape</label
               >
 
-              <OpenLayerMap ref="childPolygonArray"/>
+              <OpenLayerMap ref="childComponent"/>
 
               <div class="flex text-center justify-center items-center">
                 <div class="block group relative">
 
                   <button
                     class="my-2 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
-                    type="button" @click="onSaveShape"
+                    type="button" @click="onEraseShape"
                   >
                   Erase Shape
                   </button>

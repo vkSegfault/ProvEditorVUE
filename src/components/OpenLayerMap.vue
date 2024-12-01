@@ -16,9 +16,23 @@ provide("ol-options", options);
 
 
 const polygon = ref([]);
+const erase = () => {
+  console.log( 'Erasing Polygon' );
+  console.log( 'There are ' + zones.value.length + ' polygons' );
+
+  for(let i = 0; i < zones.value.length; i++ ) {
+    console.log( zones.value.at(i) );
+  }
+
+  zones.value.pop();
+  
+  console.log( 'There are ' + zones.value.length + ' polygons' );
+
+}
 
 defineExpose({
   polygon,
+  erase,
 });
 
 
@@ -58,35 +72,35 @@ const geojsonObject = {
     },
   },
   features: [
-    {
-      type: "Feature",
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [1367410.699338904, 5580425.463847231],
-            [4130147.645083284, 6729414.193619426],
-            [1845080.1712666703,8097872.680763839],
-            [-736916.974288825,7207083.665547193],
-          ],
-        ],
-      },
-    },
-    {
-      type: "Feature",
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [-103.85636392303468, 38.10970692739486],
-            [-103.86770698495866, 33.218572724914544],
-            [-98.20654544301988, 33.6532810221672],
-            [-98.4408283538437, 38.31894739375114],
-            [-103.85636392303468, 38.10970692739486],
-          ],
-        ],
-      },
-    },
+    // {
+    //   type: "Feature",
+    //   geometry: {
+    //     type: "Polygon",
+    //     coordinates: [
+    //       [
+    //         [1367410.699338904, 5580425.463847231],
+    //         [4130147.645083284, 6729414.193619426],
+    //         [1845080.1712666703,8097872.680763839],
+    //         [-736916.974288825,7207083.665547193],
+    //       ],
+    //     ],
+    //   },
+    // },
+    // {
+    //   type: "Feature",
+    //   geometry: {
+    //     type: "Polygon",
+    //     coordinates: [
+    //       [
+    //         [-103.85636392303468, 38.10970692739486],
+    //         [-103.86770698495866, 33.218572724914544],
+    //         [-98.20654544301988, 33.6532810221672],
+    //         [-98.4408283538437, 38.31894739375114],
+    //         [-103.85636392303468, 38.10970692739486],
+    //       ],
+    //     ],
+    //   },
+    // },
   ],
 };
 const zones = ref<Feature<Geometry>[]>([]);
@@ -110,6 +124,7 @@ const drawend = (event: DrawEvent) => {
   console.log(polygon);
   console.log(zones.value);
 };
+
 </script>
 
 <template>
@@ -143,12 +158,11 @@ const drawend = (event: DrawEvent) => {
       <ol-source-osm />
     </ol-tile-layer>
 
-    <ol-vector-layer>
+    <ol-vector-layer :updateWhileAnimating="true" :updateWhileInteracting="true">
       <ol-source-vector :projection="projection" :features="zones">
         <ol-interaction-draw
           v-if="drawEnable"
           :type="drawType"
-          :stopClick="true"
           @drawend="drawend"
           @drawstart="drawstart"
         >
