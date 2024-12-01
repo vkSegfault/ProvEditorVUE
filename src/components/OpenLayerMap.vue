@@ -5,9 +5,12 @@ import { ref, inject, onMounted } from "vue";
 import proj4 from "proj4";
 // import { DrawEvent } from "ol/interaction/Draw";
 import type { Feature } from "ol";
+import { Collection } from "ol";
 import type { Geometry } from "ol/geom";
 import { GeoJSON } from "ol/format";
 import { type DrawEvent } from "ol/interaction/Draw";
+import { type SelectEvent } from "ol/interaction/Select";
+import markerIcon from '@/assets/logo.svg';
 
 const options: Vue3OpenlayersGlobalOptions = {
   debug: false,
@@ -105,6 +108,22 @@ const geojsonObject = {
 };
 const zones = ref<Feature<Geometry>[]>([]);
 zones.value = new GeoJSON().readFeatures(geojsonObject);
+const selectedFeatures = ref(new Collection());
+const selectConditions = inject("ol-selectconditions");
+// TODO - implemennt both pointerMove (aka Hover) and Click conditions
+// const selectCondition = selectConditions.pointerMove;
+const selectCondition = selectConditions.click;
+
+const featureSelected = (event) => {
+  selectedFeatures.value = event.target.getFeatures();
+
+  console.log( 'Province Selected: ' );
+  console.log(event);
+};
+
+const selectInteactionFilter = (feature) => {
+  return feature.values_.name != undefined;
+};
 
 const drawstart = (event) => {
   console.log("DRAW START: " + event);
@@ -114,7 +133,12 @@ const drawend = (event: DrawEvent) => {
   event.target.sketchCoords_[0].forEach(coord => {
     polygon.value.push(coord);
   });
+
+  // ADD polygon (aka Feature) to polygon list
   zones.value.push(event.feature);
+  // ADD selected polygon to selected polygon list
+  selectedFeatures.value.push(event.feature);
+
   drawEnable.value = false;
   
   
@@ -123,6 +147,7 @@ const drawend = (event: DrawEvent) => {
   console.log(event);
   console.log(polygon);
   console.log(zones.value);
+  console.log(selectedFeatures.value);
 };
 
 </script>
@@ -142,6 +167,7 @@ const drawend = (event: DrawEvent) => {
   </form>
 
   <ol-map
+    ref="map"
     :loadTilesWhileAnimating="true"
     :loadTilesWhileInteracting="true"
     style="height: 400px"
@@ -158,10 +184,24 @@ const drawend = (event: DrawEvent) => {
       <ol-source-osm />
     </ol-tile-layer>
 
+    <!-- :filter="selectInteactionFilter" -->
+    <ol-interaction-select
+      @select="featureSelected"
+      :condition="selectCondition"
+      :features="selectedFeatures"
+    >
+      <ol-style>
+        <ol-style-stroke color="red" :width="4" />
+        <ol-style-fill color="rgba(255, 0, 0, 0.4)" />
+        <ol-style-icon :src="markerIcon" :scale="0.05"></ol-style-icon>
+      </ol-style>
+    </ol-interaction-select>
+
     <ol-vector-layer :updateWhileAnimating="true" :updateWhileInteracting="true">
       <ol-source-vector :projection="projection" :features="zones">
         <ol-interaction-draw
           v-if="drawEnable"
+          :stopClick="true"
           :type="drawType"
           @drawend="drawend"
           @drawstart="drawstart"
@@ -177,6 +217,7 @@ const drawend = (event: DrawEvent) => {
           </ol-style>
         </ol-interaction-draw>
         
+        <ol-interaction-snap v-if="drawEnable" />
         <ol-interaction-modify v-if="drawEnable" />
 
       </ol-source-vector>
@@ -190,6 +231,18 @@ const drawend = (event: DrawEvent) => {
         </ol-style-circle>
       </ol-style>
     </ol-vector-layer>
+
+    <!-- <ol-interaction-select
+      @select="featureSelected"
+      :condition="selectCondition"
+      :filter="selectInteactionFilter"
+    >
+      <ol-style>
+        <ol-style-stroke color="green" :width="10"></ol-style-stroke>
+        <ol-style-fill color="rgba(255,255,255,0.5)"></ol-style-fill>
+        <ol-style-icon :src="markerIcon" :scale="0.05"></ol-style-icon>
+      </ol-style>
+    </ol-interaction-select> -->
 
 
   </ol-map>
