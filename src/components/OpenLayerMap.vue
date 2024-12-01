@@ -233,7 +233,7 @@ const drawend = (event: DrawEvent) => {
         >
           <!-- STYLE WHILE DRAWING -->
           <ol-style>
-            <ol-style-stroke color="blue" :width="10"></ol-style-stroke>
+            <ol-style-stroke color="blue" :width="5"></ol-style-stroke>
             <ol-style-fill color="rgba(255, 255, 0, 0.4)"></ol-style-fill>
             <ol-style-circle :radius="5">
               <ol-style-fill color="#00dd11" />
@@ -256,18 +256,6 @@ const drawend = (event: DrawEvent) => {
         </ol-style-circle>
       </ol-style>
     </ol-vector-layer>
-
-    <!-- <ol-interaction-select
-      @select="featureSelected"
-      :condition="selectCondition"
-      :filter="selectInteactionFilter"
-    >
-      <ol-style>
-        <ol-style-stroke color="green" :width="10"></ol-style-stroke>
-        <ol-style-fill color="rgba(255,255,255,0.5)"></ol-style-fill>
-        <ol-style-icon :src="markerIcon" :scale="0.05"></ol-style-icon>
-      </ol-style>
-    </ol-interaction-select> -->
 
 
   </ol-map>
