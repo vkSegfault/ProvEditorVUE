@@ -37,7 +37,7 @@ const handleSubmit = async () => {
 //   "twoFactorRecoveryCode": "string"
 // }'
     const response = await axios.post(
-        '/proxy/login',
+        '/proxy/api/v1/auth/login',
         {
             'email': `${form.email}`,
             'password': `${form.password}`,

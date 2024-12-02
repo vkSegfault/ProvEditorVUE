@@ -27,7 +27,7 @@ const handleSubmit = async () => {
     try {
         
         const response = await axios.post(
-            '/proxy/register',
+            '/proxy/api/v1/auth/register',
             {
                 'email': `${form.email}`,
                 'password': `${form.password}`
