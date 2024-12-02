@@ -243,10 +243,11 @@ const drawend = (event: DrawEvent) => {
         </ol-interaction-draw>
         
         <ol-interaction-snap v-if="drawEnable" />
-        <ol-interaction-modify v-if="drawEnable" />
-
+        <ol-interaction-modify v-if="drawEnable" :features="selectedFeatures"></ol-interaction-modify>
+        
       </ol-source-vector>
-
+      
+      
       <!-- STYLE AFTER POLYGON IS DRAWN -->
       <ol-style>
         <ol-style-stroke color="red" :width="2"></ol-style-stroke>
