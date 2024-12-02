@@ -195,6 +195,7 @@ const drawend = (event: DrawEvent) => {
       <ol-source-osm />
     </ol-tile-layer>
 
+    <!-- RENDER WHEN HOVERING -->
     <!--       :filter="selectInteactionFilter" -->
     <ol-interaction-select 
       v-if="!drawEnable"
@@ -209,8 +210,9 @@ const drawend = (event: DrawEvent) => {
       </ol-style>
     </ol-interaction-select>
 
+    <!-- RENDER WHEN SELECTED -->
+     <!-- v-if="!drawEnable" -->
     <ol-interaction-select
-      v-if="!drawEnable"
       @select="featureSelected"
       :condition="selectClickCondition"
       :features="selectedFeatures"
@@ -222,6 +224,7 @@ const drawend = (event: DrawEvent) => {
       </ol-style>
     </ol-interaction-select>
 
+    <!-- DRAW MODE -->
     <ol-vector-layer :updateWhileAnimating="true" :updateWhileInteracting="true">
       <ol-source-vector :projection="projection" :features="zones">
         <ol-interaction-draw
@@ -245,11 +248,10 @@ const drawend = (event: DrawEvent) => {
         <ol-interaction-snap v-if="drawEnable" />
         
       </ol-source-vector>
-      
+
       <ol-interaction-modify v-if="drawEnable" :features="selectedFeatures"></ol-interaction-modify>
       
-      
-      <!-- STYLE AFTER POLYGON IS DRAWN -->
+      <!-- STYLE AFTER POLYGONS ARE DRAWN -->
       <ol-style>
         <ol-style-stroke color="red" :width="2"></ol-style-stroke>
         <ol-style-fill color="rgba(255,210,210,0.5)"></ol-style-fill>
