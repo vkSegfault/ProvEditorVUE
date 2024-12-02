@@ -4,8 +4,10 @@ import { reactive } from 'vue';
 import router from '@/router';
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
+import { useStore } from 'vuex';
 
 
+const store = useStore();
 const route = useRoute()
 // console.log(route.params)
 
@@ -57,6 +59,8 @@ const handleSubmit = async () => {
     console.log(response)
     console.log( `${form.dateRange}` );
     toast.success('Login successful...');
+    store.commit('login');
+    // TODO - use Store to keep bearer token (like we do in LoginGoogle.vue)
     router.push(`/provinces`);
   } catch (error) {
     console.error('Error:', error);
