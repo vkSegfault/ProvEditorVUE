@@ -15,7 +15,7 @@ import AssetType from '@/components/AssetType.vue';
               Land Province - most popular generic type, has population, resources and infrastructure
             </p>
             <RouterLink
-              to="/asset/add/stock"
+              to="/province/add"
               class="inline-block bg-black text-white rounded-lg px-4 py-2 hover:bg-gray-700"
             >
               Add Province
@@ -59,7 +59,7 @@ import AssetType from '@/components/AssetType.vue';
               Add Country - every Land Province and City needs to be a part of Country
             </p>
             <RouterLink
-              to="/asset/add"
+              to="/country/add"
               class="inline-block bg-green-500 text-white rounded-lg px-4 py-2 hover:bg-green-600"
             >
               Add Country

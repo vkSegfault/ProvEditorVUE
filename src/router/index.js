@@ -8,6 +8,7 @@ import NotFoundView from "@/views/NotFoundView.vue";
 import OneAssetView from "@/views/OneAssetView.vue";
 import AddProvinceView from "@/views/AddProvinceView.vue";
 import EditAssetView from "@/views/EditAssetView.vue";
+import CountryAddView from "@/views/CountryAddView.vue";
 
 const router = createRouter({
     // we can use back button with history
@@ -64,6 +65,11 @@ const router = createRouter({
             path: '/asset/edit/:type/:id',
             name: 'asset-edit',
             component: EditAssetView,
+        },
+        {
+            path: '/country/add',
+            name: 'country-add',
+            component: CountryAddView,
         },
         {
             path: '/:catchAll(.*)',
