@@ -37,7 +37,7 @@ const handleSubmit = async () => {
   try {
     // console.log( form.type.toUpperCase() )
     // console.log( newBond )
-    const response = await axios.post(`/proxy/country`, new);
+    const response = await axios.post(`/proxy/country`, newCountry;
     // console.log(response)
     console.log( `${form.dateRange}` );
     toast.success('Asset Added Successfully');
