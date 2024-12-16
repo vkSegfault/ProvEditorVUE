@@ -37,14 +37,14 @@ const handleSubmit = async () => {
   try {
     // console.log( form.type.toUpperCase() )
     // console.log( newBond )
-    const response = await axios.post(`/proxy/country`, newCountry;
+    const response = await axios.post(`/proxy/api/v1/country`, newCountry);
     // console.log(response)
-    console.log( `${form.dateRange}` );
-    toast.success('Asset Added Successfully');
-    router.push(`/asset/${form.type.toLowerCase()}/${response.data.id}`);
+    toast.success('Country Added Successfully');
+    // router.push(`/asset/${form.type.toLowerCase()}/${response.data.id}`);
+    router.push("/");
   } catch (error) {
-    console.error('Error submitting assets:', error);
-    toast.error('Assed Not Added');
+    console.error('Error submitting Country:', error);
+    toast.error('Country Not Added');
   }
 
 };
