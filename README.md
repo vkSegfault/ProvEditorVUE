@@ -1,9 +1,10 @@
 # vuefinance
 
-![Screenshot from 2024-12-17 22-25-08](https://github.com/user-attachments/assets/c9efd85d-06f4-4db2-bcf4-9acde17e86f8)
-![Screenshot from 2024-12-17 22-25-41](https://github.com/user-attachments/assets/d5ab01a0-c459-401a-bbdd-a3bcab1ec016)
-![Screenshot from 2024-12-17 22-26-49](https://github.com/user-attachments/assets/91112aef-ff81-48f9-8526-fb7254a51cad)
-![Screenshot from 2024-12-17 22-28-21](https://github.com/user-attachments/assets/b7ba19bb-44c1-4179-87b9-54f34c0221bb)
+![Screenshot from 2024-12-19 19-53-15](https://github.com/user-attachments/assets/cfb7dd04-b604-4983-a583-a44aee43a27a)
+![Screenshot from 2024-12-19 19-53-33](https://github.com/user-attachments/assets/7e48d7d8-f758-4c60-858d-a34645008023)
+![Screenshot from 2024-12-19 19-54-03](https://github.com/user-attachments/assets/8f0e0acb-8f2c-4806-bb09-709c3456b6c9)
+![Screenshot from 2024-12-19 19-54-25](https://github.com/user-attachments/assets/036fe0e3-dea1-4484-a676-d9b3e3689bd9)
+
 
 
 
