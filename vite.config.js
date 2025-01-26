@@ -9,7 +9,7 @@ export default defineConfig({
     vue(),
   ],
   server: {
-    port: 3000,
+    port: 3077,
     proxy: {
       '/proxy': {
         target: 'http://127.0.0.1:5077',
