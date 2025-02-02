@@ -15,7 +15,7 @@ import AssetType from '@/components/AssetType.vue';
               Land Province - most popular generic type, has population, resources and infrastructure
             </p>
             <RouterLink
-              to="/province/add"
+              to="/province/add/Land"
               class="inline-block bg-black text-white rounded-lg px-4 py-2 hover:bg-gray-700"
             >
               Add Province
@@ -28,7 +28,7 @@ import AssetType from '@/components/AssetType.vue';
               Sea Province - doesn't belongs to any country but has resources
             </p>
             <RouterLink
-              to="/asset/add/bond"
+              to="/province/add/Sea"
               class="inline-block bg-green-500 text-white rounded-lg px-4 py-2 hover:bg-green-600"
             >
               Add Sea Province
@@ -40,7 +40,7 @@ import AssetType from '@/components/AssetType.vue';
               City is special type of Province which doesn't have natural resources
             </p>
             <RouterLink
-              to="/asset/add"
+              to="/province/add/City"
               class="inline-block bg-green-500 text-white rounded-lg px-4 py-2 hover:bg-green-600"
             >
               Add City

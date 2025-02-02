@@ -13,7 +13,7 @@ import OpenLayerMap from './OpenLayerMap.vue';
 const route = useRoute()
 const type = route.params.type ? route.params.type.toLowerCase() : '';
 const stringType = type.charAt(0).toUpperCase() + type.slice(1);
-// console.log(route.params)
+console.log(route.params)
 
 
 // this variable is stand-in for everything exposes via defineExpose() in from OpenLayerMap.vue
@@ -28,7 +28,7 @@ const forceRerender = () => {
 // eveything from submit form will be coppied to below object
 const form = reactive({
   // default type here - when we click add new particular type it should already be picked up and not provided once more
-  type: stringType,
+  provinceType: stringType,
   name: '',
   notes: '',
   dateRange: null,
@@ -102,7 +102,7 @@ const onEraseShape = () => {
               >
               <!-- v-model binds form variable defined in <script /> with whataver value user pass to this form from website -->
               <select
-                v-model="form.type"
+                v-model="form.provinceType"
                 id="type"
                 name="type"
                 class="border rounded w-full py-2 px-3"
