@@ -30,12 +30,13 @@ const form = reactive({
   // default type here - when we click add new particular type it should already be picked up and not provided once more
   provinceType: stringType,
   name: '',
+  country: '',
   notes: '',
-  dateRange: null,
-  value: 0,
-  rate: 0,
-  days: 0,
-  tax: 0
+  shape: childComponent == null ? childComponent.value.polygon : null,
+  population: 0,
+  resources: '',
+  infra: '',
+  terrain: ''
 });
 
 const toast = useToast();
@@ -43,21 +44,30 @@ const toast = useToast();
 const handleSubmit = async () => {
   // console.log('submit pressed')
   // console.log( form.description )
-  const newBond = {
-    name: form.name,
-    type: form.type.toUpperCase(),
+  const newProvince = {
+    provinceType: form.provinceType,
+    provinceName: form.name,
+    countryName: form.country,
     notes: form.notes,
-    value: form.value,
-    rate: form.rate,
-    days: form.days,
-    tax: form.tax
+    shape: form.shape,
+    population: form.population,
+    resources: form.resources.split(','),
+    infrastructure: form.infra.split(',')
   };
 
   try {
     // console.log( form.type.toUpperCase() )
-    // console.log( newBond )
-    const response = await axios.post(`/proxy/assets/${form.type.toLowerCase()}`, newBond);
-    // console.log(response)
+    console.log( newProvince )
+    // const responseB = await axios.post(`/proxy/assets/${form.type.toLowerCase()}`, newProvince);
+    // const responseC = await axios.post(`/proxy/api/v1/country`, newCountry);
+    const response = await axios.post( 'http://localhost:5077/api/v1/province', newProvince,
+          { headers: {
+              'accept': 'text/plain',
+              'Content-Type': 'application/json'
+            } 
+          } 
+        );
+    console.log(response)
     console.log( `${form.dateRange}` );
     toast.success('Asset Added Successfully');
     router.push(`/asset/${form.type.toLowerCase()}/${response.data.id}`);
@@ -135,6 +145,7 @@ const onEraseShape = () => {
                 Country
               </label>
               <input
+              v-model="form.country"
                 type="text"
                 id="country"
                 name="country"
@@ -197,6 +208,7 @@ Notes about province will be ignored by engine"
                 >Population</label
               >
               <input
+                v-model="form.population"
                 type="number"
                 id="population"
                 name="population"
@@ -212,6 +224,7 @@ Notes about province will be ignored by engine"
                 >Resources</label
               >
               <input
+                v-model="form.resources"
                 type="text"
                 id="resources"
                 name="resources"
@@ -227,6 +240,7 @@ Notes about province will be ignored by engine"
                 >Infrastructure</label
               >
               <input
+                v-model="form.infra"
                 type="text"
                 id="infrastructure"
                 name="infrastructure"
@@ -241,6 +255,7 @@ Notes about province will be ignored by engine"
                 >Terrain</label
               >
               <input
+                v-model="form.terrain"
                 type="text"
                 id="terrain"
                 name="terrain"

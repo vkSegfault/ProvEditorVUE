@@ -36,9 +36,9 @@ const handleSubmit = async () => {
 
   try {
     // console.log( form.type.toUpperCase() )
-    // console.log( newBond )
+    // console.log( newCountry )
     const response = await axios.post(`/proxy/api/v1/country`, newCountry);
-    // console.log(response)
+    console.log(response)
     toast.success('Country Added Successfully');
     // router.push(`/asset/${form.type.toLowerCase()}/${response.data.id}`);
     router.push("/");
