@@ -93,8 +93,8 @@ const logout = () => {
                   >Home</RouterLink
                 >
                 <RouterLink
-                  to="/assets"
-                  :class="[isActiveLink('/assets') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
+                  to="/provinces"
+                  :class="[isActiveLink('/provinces') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
                   >Provinces</RouterLink
                 >
                 <RouterLink

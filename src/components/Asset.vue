@@ -12,7 +12,7 @@ const toggleFullDescription = () => {
     showFullDescription.value = !showFullDescription.value;
 }
 const truncatedDescripion = computed(() => {
-    let description = props.asset.description;
+    let description = props.asset.notes;
     if (!showFullDescription.value) {
         description = description.substring(0, 90) + '...';
     }
@@ -20,11 +20,13 @@ const truncatedDescripion = computed(() => {
 })
 
 onMounted(() => {
-    const type = props.asset.type
-    if (type === "STOCK") {
+    const type = props.asset.provinceType
+    if (type === "Sea") {
         bgColor.value = "bg-blue-100"
-    } else if (type === "BOND") {
+    } else if (type === "Land") {
         bgColor.value = "bg-green-100"
+    } else if (type === "City") {
+        bgColor.value = "bg-red-100"
     }
 });
 
@@ -36,8 +38,9 @@ const bgColor = ref('bg-white')
     <div class="rounded-xl shadow-md relative" :class="bgColor">
         <div class="p-4">
             <div class="mb-6">
-            <div class="text-gray-600 my-2">{{ asset.type }}</div>
-            <h3 class="text-xl font-bold">{{ asset.name }}</h3>
+            <div class="text-gray-600 my-2">{{ asset.provinceType }}</div>
+            <h3 class="text-xl font-bold">{{ asset.provinceName }}</h3>
+            <div class="text-gray-600 my-2">{{ asset.countryName }}</div>
             </div>
 
             <div class="mb-5">
@@ -49,7 +52,7 @@ const bgColor = ref('bg-white')
                 </button>
             </div>
 
-            <h3 class="text-green-500 mb-2">{{ asset.salary }} / Year</h3>
+            <h3 class="text-green-500 mb-2">Population: {{ asset.population }}</h3>
 
             <div class="border border-gray-100 mb-5"></div>
 

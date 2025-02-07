@@ -4,7 +4,10 @@ import Asset from './Asset.vue';
 import { RouterLink } from 'vue-router';
 import axios from 'axios';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import { useStore } from 'vuex';
 
+
+const store = useStore();
 
 const props = defineProps({
     limit: Number,
@@ -17,7 +20,7 @@ const props = defineProps({
 // const jobsJson = ref(JobDataJson);
 // const jobsJson = ref([]);  // <-- most stick to this approach
 const state = reactive({
-    assets: [],
+    provinces: [],
     isLoading: true,
     limit: props.limit,
     showButton: props.showButton
@@ -25,18 +28,25 @@ const state = reactive({
 
 onMounted(async () => {
     try {
-        const response = await axios.get('/proxy/api/v1/province');
+        const response = await axios.get('/proxy/api/v1/province/all',
+        {
+            headers: {
+                'accept': 'text/plain',
+                'Content-Type': 'application/json',
+                'Authorization': store.state.access_token
+            }
+        });
         console.log(response)
-        state.assets = response.data;
+        state.provinces = response.data;
     } catch (error) {
-        console.error('Error fetching assets', error);
+        console.error('Error fetching provinces: ', error);
     } finally {
         state.isLoading = false;
     }
 });
 
 
-const viewAllAssets = async () => {
+const viewAllProvinces = async () => {
     state.limit = 100
     state.showButton = false
 }
@@ -58,7 +68,7 @@ const viewAllAssets = async () => {
             <!-- Show asset listing when done loading -->
             <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- "asset" is prop from Asset.vue -->
-                <Asset v-for="asset in state.assets.slice(0, state.limit || state.assets.length)" :key="asset.id" :asset="asset" >  
+                <Asset v-for="asset in state.provinces.slice(0, state.limit || state.provinces.length)" :key="asset.id" :asset="asset" >  
                     <!-- {{ job.title }} -->
                 </Asset>
             </div>
@@ -66,7 +76,7 @@ const viewAllAssets = async () => {
     </section>
 
     <section v-if="state.showButton">
-        <button @click="viewAllAssets"
+        <button @click="viewAllProvinces"
             class="m-auto min-w-80 max-w-lg my-10 px-6 block bg-black text-white text-center py-4 px-6 rounded-xl hover:bg-gray-700"
             >View All Provinces
         </button>
