@@ -5,11 +5,12 @@ import router from '@/router';
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
 import { useStore } from 'vuex';
+import JSON5 from 'json5'
 
 
 const store = useStore();
 const route = useRoute()
-// console.log(route.params)
+let bearerAccessToken = "";
 
 
 // eveything from submit form will be coppied to below object
@@ -48,7 +49,7 @@ const handleSubmit = async () => {
         },
         {
             params: {
-            'useCookies': 'true'
+            'useCookies': 'false'
             },
             headers: {
             'accept': 'application/json',
@@ -57,6 +58,14 @@ const handleSubmit = async () => {
         }
     );
     console.log(response)
+    const accessToken = response.data.accessToken;
+    console.log(accessToken)
+    const accessTokenStr = JSON5.stringify(accessToken);
+    bearerAccessToken = "Bearer " + accessTokenStr.substring(1, accessTokenStr.length-1)   // remove single quotation marks from start and end
+    console.log( "Successfully retrieved access token: " + bearerAccessToken );
+    console.log("User logged in: " + store.state.logged_in);
+    store.commit('set_acccess_token', bearerAccessToken);
+    console.log("Access token stored in Vuex Store: " + store.state.access_token);
     console.log( `${form.dateRange}` );
     toast.success('Login successful...');
     store.commit('login');
