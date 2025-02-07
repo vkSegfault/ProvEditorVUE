@@ -7,11 +7,12 @@ import { useToast } from 'vue-toastification';
 import Calendar from 'primevue/calendar';
 import DatePicker from 'primevue/datepicker';
 import OpenLayerMap from './OpenLayerMap.vue';
-
+import { useStore } from 'vuex';
 
 
 const route = useRoute()
 const type = route.params.type ? route.params.type.toLowerCase() : '';
+const store = useStore();
 const stringType = type.charAt(0).toUpperCase() + type.slice(1);
 // console.log(route.params)
 
@@ -37,7 +38,28 @@ const handleSubmit = async () => {
   try {
     // console.log( form.type.toUpperCase() )
     // console.log( newCountry )
-    const response = await axios.post(`/proxy/api/v1/country`, newCountry);
+//     curl -X 'POST' \
+//   'http://localhost:5077/api/v1/country' \
+//   -H 'accept: text/plain' \
+//   -H 'Authorization: Bearer CfDJ8BOMx_36NgZOqRSICWKSLRGhZcNWTJhAZ03hVTZcAaMNdyPH_GZWqSrs_Wl501YxcDjRY4S_uTyrJPMAhy-gBDgEI4i3-Zo8aZqd6Ei-q-O2LwkWq4lYvaEZRxXztix2J6Vgha95J0ovnjKtD8o_Y9iP-IFC3T6DEs-eApPUj2JAT0LGBR3ul_RE-dalZuUha9RMicVCMRPVqAk-aCfklgPHdvVy8ppk9azMwTaBwqf47LIziZdqDStZrHh834bgYl80hPV16JAl6zd8anZjldwdh550t5Z-va0VM-Dl9Fnykz9q4yoXjXAtLzBBB89QD45UiCepIGRp9yYfiKL_e3ABwf8QK3hg2TDGSCz2fR7OJXyR0v2D3vWOA-gUQ_53hYrUWXDGXgia33eh9oY8ENS-Ht8RQ5SkjDBpp-9-BO2F7iM1uZm-set6gXIj1UgNLK5MJ3Fw_QY-bncPiv9O-0L0FXqWDqVBTl_vN1N1H3SS0P6Zm5q62l8AaA08ZiZqDp8eHZmweG-oE-Xn-cPbZwFVwYwzRCJA93hHW6fdOlML_FNLfHRJyOCC3SF_NebjlA' \
+//   -H 'Content-Type: application/json' \
+//   -d '{
+//   "countryName": "Iraq",
+//   "notes": "string"
+// }'
+    const response = await axios.post(`/proxy/api/v1/country`,
+      newCountry,
+      {
+        params: {
+            'useCookies': 'false'
+          },
+        headers: {
+            'accept': 'text/plain',
+            'Content-Type': 'application/json',
+            'Authorization': store.state.access_token
+          }
+        }
+    );
     console.log(response)
     toast.success('Country Added Successfully');
     // router.push(`/asset/${form.type.toLowerCase()}/${response.data.id}`);
