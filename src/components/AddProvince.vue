@@ -51,7 +51,7 @@ const handleSubmit = async () => {
     provinceName: form.name,
     countryName: form.country,
     notes: form.notes,
-    shape: form.shape,
+    shape: childComponent.value.polygon.flat(),
     population: form.population,
     resources: form.resources.split(','),
     infrastructures: form.infra.split(',')
@@ -66,7 +66,7 @@ const handleSubmit = async () => {
 //     curl -X 'POST' \
 //   'http://localhost:5077/api/v1/province' \
 //   -H 'accept: text/plain' \
-//   -H 'Authorization: Bearer CfDJ8BOMx_36NgZOqRSICWKSLREAIFFvTSySaH7fJHQVIMrI1EIXwXT3HXysiJ6KLaBJnnd7EDrpNWnwMw2caFxbEUshfwRoX2-L-3t33IlJvRWK1j9qEKTnIKv_c7YwW6laafj4aQ0RoJjmwf1xA8fD8kmzstSus6kXrzERYkcIgAwFS-9aoEhN-LG8V3qUBGuPt_sgs_9H2S4pT6SFdYEtsC1p_IUkJpYtmq9jNG-zOOaMfbhsZfDbCkfPlN7rA8RwXxgjagWKOV_1OnQutdQGYgvBF0cc18HoJY2b3SKMyt6fZ8c821aBbr99nfSuX3izdSQLY-9VxNuc9I_1j7EM83Sl3mlDgGEQ3i3aRcnhrUYTTO9jjNDc3sX2DHb0YlJwLVBjTILnrR8vVazIuQGGTl-kwGNuyppcNwKeZoztPxIxDWl1zHFraqpG0TW16QsO9a59KJ2JzCLHt4NpOJ-GBvxs3amBj8SGumG10l50bscGPrirT-dKizJX_hqKZ5J-npTP4rYM8aOtrG-jRK_U8Pdgy_oRJiKebOrJ4b_XDw-7LtP38JjNEZXIQUlFcb9sILx5C73EYEFuQt7ytgldrIr2nruHtaosXmBN65az-OKjW2qEDCf8LkJY1hMqt_NhwgNpbqE6sLrhv_DkguRmWXG2ykoygZBdmQY4I1X2or5NFOxKLlP02eVCbRbnGFc2YksDKxe2k4qByG3QvxkA-jcLD_P8vx-JzfWIOivgYuhkjmWLYBhMV9kXrPXKx3azfQJsmIMYFWqw7k3bV1BR_XhgDh1YnUybgeBvVsAEVtWpcMpM8KBI-yiRc5NLC8iY5hVbOGY8wxU0X85_IbxxfS9Ww2wjzMoSWNuEmaf9Yi2yw8Zrtd-_n-wtqQc_Q36HhnYPp_TGOCUYEYJHys3kYmDzLEtihKuFsQuUUpittHM3jY1wZeGKgcdYWz46HNnVFlF7olHn0oi8qRLR2gBeO7mZ3I80xu9iP6S8o61-XbAAwwd5jDGgUP28P5nyWqoumg' \
+//   -H 'Authorization: Bearer CfDJ8BOMx_36NgZOqRSICWKSLREAIFFYJHwd5jDGgUP28P5nyWqoumg' \
 //   -H 'Content-Type: application/json' \
 //   -d '{
 //   "provinceType": "Land",
@@ -85,8 +85,8 @@ const handleSubmit = async () => {
 //   ]
 // }'
 
-    newProvince.shape = [1, 2];
-    console.log(newProvince);
+    // newProvince.shape = [1, 2];
+    // console.log(newProvince);
 
     const response = await axios.post( 'http://localhost:5077/api/v1/province', 
         newProvince,
@@ -112,7 +112,7 @@ const handleSubmit = async () => {
 
 const onEraseShape = () => {
   console.log( childComponent.value.polygon );
-  console.log( "Polygon [VIEWED VIA PARENT COMPONENT]" + childComponent.value.polygon );
+  console.log( "Polygon [VIEWED VIA PARENT COMPONENT]: " + childComponent.value.polygon );
 
   childComponent.value.erase();
   forceRerender();
