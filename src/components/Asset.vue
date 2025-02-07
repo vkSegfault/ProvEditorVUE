@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router';
 
 // depending on Asset type background color should be set automatically to one matching Card
 const props = defineProps({
-    asset: Object
+    province: Object
 });
 
 const showFullDescription = ref(false);
@@ -12,7 +12,7 @@ const toggleFullDescription = () => {
     showFullDescription.value = !showFullDescription.value;
 }
 const truncatedDescripion = computed(() => {
-    let description = props.asset.notes;
+    let description = props.province.notes;
     if (!showFullDescription.value) {
         description = description.substring(0, 90) + '...';
     }
@@ -20,7 +20,7 @@ const truncatedDescripion = computed(() => {
 })
 
 onMounted(() => {
-    const type = props.asset.provinceType
+    const type = props.province.provinceType
     if (type === "Sea") {
         bgColor.value = "bg-blue-100"
     } else if (type === "Land") {
@@ -38,9 +38,8 @@ const bgColor = ref('bg-white')
     <div class="rounded-xl shadow-md relative" :class="bgColor">
         <div class="p-4">
             <div class="mb-6">
-            <div class="text-gray-600 my-2">{{ asset.provinceType }}</div>
-            <h3 class="text-xl font-bold">{{ asset.provinceName }}</h3>
-            <div class="text-gray-600 my-2">{{ asset.countryName }}</div>
+            <div class="text-gray-600 my-2">{{ province.provinceType }}</div>
+            <h3 class="text-xl font-bold">{{ province.provinceName }}</h3>
             </div>
 
             <div class="mb-5">
@@ -52,17 +51,17 @@ const bgColor = ref('bg-white')
                 </button>
             </div>
 
-            <h3 class="text-green-500 mb-2">Population: {{ asset.population }}</h3>
+            <h3 class="text-green-500 mb-2">Population: {{ province.population }}</h3>
 
             <div class="border border-gray-100 mb-5"></div>
 
             <div class="flex flex-col lg:flex-row justify-between mb-4">
             <div class="text-orange-700 mb-3">
                 <i class="pi pi-map-marker text-orange-700"></i>
-                {{ asset.location }}
+                {{ province.countryName }}
             </div>
             <RouterLink
-                :to="'/asset/' + asset.type + '/' + asset.id"
+                :to="'/asset/' + province.type + '/' + province.id"
                 class="h-[36px] bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-center text-sm"
             >
                 Read More

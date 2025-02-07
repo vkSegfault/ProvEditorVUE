@@ -68,7 +68,7 @@ const viewAllProvinces = async () => {
             <!-- Show asset listing when done loading -->
             <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- "asset" is prop from Asset.vue -->
-                <Asset v-for="asset in state.provinces.slice(0, state.limit || state.provinces.length)" :key="asset.id" :asset="asset" >  
+                <Asset v-for="province in state.provinces.slice(0, state.limit || state.provinces.length)" :key="province.provinceName" :province="province" >  
                     <!-- {{ job.title }} -->
                 </Asset>
             </div>
