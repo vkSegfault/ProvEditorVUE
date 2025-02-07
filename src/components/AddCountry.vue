@@ -50,15 +50,12 @@ const handleSubmit = async () => {
     const response = await axios.post(`/proxy/api/v1/country`,
       newCountry,
       {
-        params: {
-            'useCookies': 'false'
-          },
         headers: {
-            'accept': 'text/plain',
-            'Content-Type': 'application/json',
-            'Authorization': store.state.access_token
-          }
+          'accept': 'text/plain',
+          'Content-Type': 'application/json',
+          'Authorization': store.state.access_token
         }
+      }
     );
     console.log(response)
     toast.success('Country Added Successfully');

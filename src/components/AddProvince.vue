@@ -7,6 +7,7 @@ import { useToast } from 'vue-toastification';
 import Calendar from 'primevue/calendar';
 import DatePicker from 'primevue/datepicker';
 import OpenLayerMap from './OpenLayerMap.vue';
+import { useStore } from 'vuex';
 
 
 
@@ -14,6 +15,7 @@ const route = useRoute()
 const type = route.params.type ? route.params.type.toLowerCase() : '';
 const stringType = type.charAt(0).toUpperCase() + type.slice(1);
 console.log(route.params)
+const store = useStore();
 
 
 // this variable is stand-in for everything exposes via defineExpose() in from OpenLayerMap.vue
@@ -52,7 +54,7 @@ const handleSubmit = async () => {
     shape: form.shape,
     population: form.population,
     resources: form.resources.split(','),
-    infrastructure: form.infra.split(',')
+    infrastructures: form.infra.split(',')
   };
 
   try {
@@ -60,17 +62,47 @@ const handleSubmit = async () => {
     console.log( newProvince )
     // const responseB = await axios.post(`/proxy/assets/${form.type.toLowerCase()}`, newProvince);
     // const responseC = await axios.post(`/proxy/api/v1/country`, newCountry);
-    const response = await axios.post( 'http://localhost:5077/api/v1/province', newProvince,
-          { headers: {
-              'accept': 'text/plain',
-              'Content-Type': 'application/json'
-            } 
-          } 
-        );
+
+//     curl -X 'POST' \
+//   'http://localhost:5077/api/v1/province' \
+//   -H 'accept: text/plain' \
+//   -H 'Authorization: Bearer CfDJ8BOMx_36NgZOqRSICWKSLREAIFFvTSySaH7fJHQVIMrI1EIXwXT3HXysiJ6KLaBJnnd7EDrpNWnwMw2caFxbEUshfwRoX2-L-3t33IlJvRWK1j9qEKTnIKv_c7YwW6laafj4aQ0RoJjmwf1xA8fD8kmzstSus6kXrzERYkcIgAwFS-9aoEhN-LG8V3qUBGuPt_sgs_9H2S4pT6SFdYEtsC1p_IUkJpYtmq9jNG-zOOaMfbhsZfDbCkfPlN7rA8RwXxgjagWKOV_1OnQutdQGYgvBF0cc18HoJY2b3SKMyt6fZ8c821aBbr99nfSuX3izdSQLY-9VxNuc9I_1j7EM83Sl3mlDgGEQ3i3aRcnhrUYTTO9jjNDc3sX2DHb0YlJwLVBjTILnrR8vVazIuQGGTl-kwGNuyppcNwKeZoztPxIxDWl1zHFraqpG0TW16QsO9a59KJ2JzCLHt4NpOJ-GBvxs3amBj8SGumG10l50bscGPrirT-dKizJX_hqKZ5J-npTP4rYM8aOtrG-jRK_U8Pdgy_oRJiKebOrJ4b_XDw-7LtP38JjNEZXIQUlFcb9sILx5C73EYEFuQt7ytgldrIr2nruHtaosXmBN65az-OKjW2qEDCf8LkJY1hMqt_NhwgNpbqE6sLrhv_DkguRmWXG2ykoygZBdmQY4I1X2or5NFOxKLlP02eVCbRbnGFc2YksDKxe2k4qByG3QvxkA-jcLD_P8vx-JzfWIOivgYuhkjmWLYBhMV9kXrPXKx3azfQJsmIMYFWqw7k3bV1BR_XhgDh1YnUybgeBvVsAEVtWpcMpM8KBI-yiRc5NLC8iY5hVbOGY8wxU0X85_IbxxfS9Ww2wjzMoSWNuEmaf9Yi2yw8Zrtd-_n-wtqQc_Q36HhnYPp_TGOCUYEYJHys3kYmDzLEtihKuFsQuUUpittHM3jY1wZeGKgcdYWz46HNnVFlF7olHn0oi8qRLR2gBeO7mZ3I80xu9iP6S8o61-XbAAwwd5jDGgUP28P5nyWqoumg' \
+//   -H 'Content-Type: application/json' \
+//   -d '{
+//   "provinceType": "Land",
+//   "provinceName": "Cracovia",
+//   "countryName": "Poland",
+//   "notes": "string",
+//   "shape": [
+//     0
+//   ],
+//   "population": 0,
+//   "resources": [
+//     "Coal"
+//   ],
+//   "infrastructures": [
+//     "Airport"
+//   ]
+// }'
+
+    newProvince.shape = [1, 2];
+    console.log(newProvince);
+
+    const response = await axios.post( 'http://localhost:5077/api/v1/province', 
+        newProvince,
+        {
+          headers: {
+            'accept': 'text/plain',
+            'Content-Type': 'application/json',
+            'Authorization': store.state.access_token
+          }
+        }
+    );
     console.log(response)
     console.log( `${form.dateRange}` );
     toast.success('Asset Added Successfully');
-    router.push(`/asset/${form.type.toLowerCase()}/${response.data.id}`);
+    // got to the this particular list
+    router.push(`/asset/${form.provinceType.toLowerCase()}/${response.data.id}`);
   } catch (error) {
     console.error('Error submitting assets:', error);
     toast.error('Assed Not Added');
