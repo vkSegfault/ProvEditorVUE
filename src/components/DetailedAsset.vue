@@ -25,7 +25,7 @@ const provinceName = route.path.split('/')[2];  // route.path return whole path 
 console.log("Route params + Route path: " + route.params + route.path + provinceName)
 
 const state = reactive({
-  asset: {},
+  province: {},
   isLoading: true
 })
 
@@ -46,9 +46,17 @@ const deleteAsset = async () => {
 
 onMounted(async () => {
     try {
-        const response = await axios.get(`/proxy/api/v1/province/${provinceName}`);
+        const response = await axios.get(`/proxy/api/v1/province/${provinceName}`,
+        {
+            headers: {
+                'accept': 'text/plain',
+                'Content-Type': 'application/json',
+                'Authorization': store.state.access_token
+            }
+        }
+        );
         console.log(response)
-        state.asset = response.data;
+        state.province = response.data;
     } catch (error) {
         console.error(`Error fetching province: ${provinceName}`, error);
     } finally {
@@ -77,33 +85,41 @@ onMounted(async () => {
             <div
               class="bg-white p-6 rounded-lg shadow-md text-center md:text-left"
             >
-              <div class="text-gray-500 mb-4">{{ state.asset.provinceType }}</div>
-              <h1 class="text-3xl font-bold mb-4">{{ state.asset.name }} (asset no. {{ $route.params.id }})</h1>
+              <div class="text-gray-500 mb-4">{{ state.province.provinceType }}</div>
+              <h1 class="text-3xl font-bold mb-4">{{ state.province.provinceName }} (Province no. {{ $route.params.id }})</h1>
               <div
                 class="text-gray-500 mb-4 flex align-middle justify-center md:justify-start"
               >
                 <i
-                  class="pi pi-map-marker text-orange-700 mr-2"
+                  class="pi pi-map-marker text-orange-700 mr-2 mt-1"
                 ></i>
-                <p class="text-orange-700">Boston, MA</p>
+                <p class="text-orange-700">{{ state.province.countryName }}</p>
               </div>
             </div>
 
             <div class="bg-white p-6 rounded-lg shadow-md mt-6">
               <h3 class="text-green-800 text-lg font-bold mb-6">
-                Job Description
+                Population: {{ state.province.population }}
               </h3>
 
+              <!-- <p class="mb-4">
+                {{ state.province.population }}
+              </p> -->
+
+              <h3 class="text-green-800 text-lg font-bold mb-2">Resources:</h3>
+              <div class="grid grid-cols-5 gap-4">
+                <div :class="`${bg} p-3 rounded-lg shadow-md`">Coal</div>
+                <div :class="`${bg} p-3 rounded-lg shadow-md`">Gas</div>
+              </div>
               <p class="mb-4">
-                We are seeking a talented Front-End Developer to join our team
-                in Boston, MA. The ideal candidate will have strong skills in
-                HTML, CSS, and JavaScript, with experience working with modern
-                JavaScript frameworks such as Vue or Angular.
+                {{ state.province.resources }}
               </p>
 
-              <h3 class="text-green-800 text-lg font-bold mb-2">Salary</h3>
+              <h3 class="text-green-800 text-lg font-bold mb-2">Infrastructures:</h3>
 
-              <p class="mb-4">$70k - $80K / Year</p>
+              <p class="mb-4">
+                {{ state.province.infrastructures }}
+              </p>
             </div>
           </main>
 
@@ -111,23 +127,20 @@ onMounted(async () => {
           <aside>
             <!-- Company Info -->
             <div class="bg-white p-6 rounded-lg shadow-md">
-              <h3 class="text-xl font-bold mb-6">Company Info</h3>
+              <h3 class="text-xl font-bold mb-6">Province Notes</h3>
 
-              <h2 class="text-2xl">NewTek Solutions</h2>
+              <h2 class="text-2xl">{{ state.province.provinceName }}</h2>
 
               <p class="my-2">
-                NewTek Solutions is a leading technology company specializing in
-                web development and digital solutions. We pride ourselves on
-                delivering high-quality products and services to our clients
-                while fostering a collaborative and innovative work environment.
+                {{ state.province.notes }}
               </p>
 
               <hr class="my-4" />
 
-              <h3 class="text-xl">Contact Email:</h3>
+              <h3 class="text-xl">Last edited by:</h3>
 
               <p class="my-2 bg-green-100 p-2 font-bold">
-                contact@newteksolutions.com
+                michalus@gamil.com
               </p>
 
               <h3 class="text-xl">Contact Phone:</h3>
@@ -137,7 +150,7 @@ onMounted(async () => {
 
             <!-- Manage -->
             <div class="bg-white p-6 rounded-lg shadow-md mt-6">
-              <h3 class="text-xl font-bold mb-6">Manage Job</h3>
+              <h3 class="text-xl font-bold mb-6">Manage Province</h3>
               <!-- <a
                 href="add-job.html"
                 class="bg-green-500 hover:bg-green-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
@@ -148,13 +161,13 @@ onMounted(async () => {
                 :to="'/asset/edit/' + assetType + '/' + assetId"
                 class="bg-green-500 hover:bg-green-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
               >
-                Edit Asset
+                Edit Province
               </RouterLink>
 
               <button @click="deleteAsset"
                 class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
               >
-                Delete Asset
+                Delete Province
               </button>
             </div>
           </aside>
