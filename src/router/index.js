@@ -5,7 +5,7 @@ import LoginView from "@/views/LoginView.vue";
 import ConfirmMailView from "@/views/ConfirmMailView.vue";
 import ProvinceListView from "@/views/ProvinceListView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
-import OneAssetView from "@/views/OneAssetView.vue";
+import ProvinceDetailedView from "@/views/ProvinceDetailedView.vue";
 import AddProvinceView from "@/views/AddProvinceView.vue";
 import EditAssetView from "@/views/EditAssetView.vue";
 import CountryAddView from "@/views/CountryAddView.vue";
@@ -40,9 +40,9 @@ const router = createRouter({
             component: ProvinceListView
         },
         {
-            path: '/asset/:type/:id',
+            path: '/province/:name',
             name: 'asset-id',
-            component: OneAssetView
+            component: ProvinceDetailedView
         },
         {
             path: '/province/add',

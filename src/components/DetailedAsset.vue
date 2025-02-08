@@ -5,6 +5,10 @@ import { useRoute, RouterLink, useRouter } from 'vue-router';
 import axios from 'axios';
 import BackButton from './BackButton.vue';
 import { useToast } from 'vue-toastification';
+import { useStore } from 'vuex';
+
+
+const store = useStore();
 
 // the problem here is that we execute this component via Router Link/View only so we can't pass whole object as prop
 // we only get id from route which is part of url
@@ -16,9 +20,9 @@ const route = useRoute();
 const router = useRouter();
 const toast = useToast();
 
-const assetId = route.params.id;
-const assetType = route.params.type.toLowerCase();
-// console.log(route.params)
+const provinceName = route.path.split('/')[2];  // route.path return whole path so e.g.: 'province/Masovia'
+// const assetType = route.params.type.toLowerCase();
+console.log("Route params + Route path: " + route.params + route.path + provinceName)
 
 const state = reactive({
   asset: {},
@@ -27,14 +31,14 @@ const state = reactive({
 
 const deleteAsset = async () => {
   try {
-    const confirm = window.confirm('Do you want to delete this asset?');
+    const confirm = window.confirm('Do you want to delete this Province?');
     if (confirm) {
-      await axios.delete(`/proxy/assets/${assetType}/${assetId}`);
+      await axios.delete(`/proxy/province/${provinceName}`);
       toast.success('Asset Deleted Successfully');
       router.push('/assets');
     }
   } catch(error) {
-    console.log(`/proxy/${assetType}/${assetId}`);
+    console.log(`/proxy/${provinceName}`);
     console.error('Error Deleting Asset: ', error);
     toast.error('Asset Not Deleted');
   }
@@ -42,11 +46,11 @@ const deleteAsset = async () => {
 
 onMounted(async () => {
     try {
-        const response = await axios.get(`/proxy/assets/${assetType}/${assetId}`);
-        // console.log(response)
+        const response = await axios.get(`/proxy/api/v1/province/${provinceName}`);
+        console.log(response)
         state.asset = response.data;
     } catch (error) {
-        console.error('Error fetching assets', error);
+        console.error(`Error fetching province: ${provinceName}`, error);
     } finally {
         state.isLoading = false;
     }
@@ -61,7 +65,7 @@ onMounted(async () => {
       <!-- Show loading spinner while state.isLoading is true -->
       <div v-if="state.isLoading" class="text-center text-gray-500 py-6">
         <h2 class="text-3xl font-bold text-green-500 mb-6 text-center">
-          Loading asset...
+          Loading province...
         </h2>
         <PulseLoader />
       </div>
@@ -73,7 +77,7 @@ onMounted(async () => {
             <div
               class="bg-white p-6 rounded-lg shadow-md text-center md:text-left"
             >
-              <div class="text-gray-500 mb-4">{{ state.asset.type }}</div>
+              <div class="text-gray-500 mb-4">{{ state.asset.provinceType }}</div>
               <h1 class="text-3xl font-bold mb-4">{{ state.asset.name }} (asset no. {{ $route.params.id }})</h1>
               <div
                 class="text-gray-500 mb-4 flex align-middle justify-center md:justify-start"
