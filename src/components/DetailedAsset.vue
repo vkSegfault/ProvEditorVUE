@@ -137,15 +137,17 @@ onMounted(async () => {
 
               <hr class="my-4" />
 
+              <h3 class="text-xl">Authored by:</h3>
+
+              <p class="my-2 bg-green-100 p-2 font-bold">
+                {{ state.province.authoredBy }} {{ state.province.createdAt }}
+              </p>
+
               <h3 class="text-xl">Last edited by:</h3>
 
               <p class="my-2 bg-green-100 p-2 font-bold">
-                michalus@gamil.com
+                {{ state.province.modifiedBy }} {{ state.province.modifiedAt }}
               </p>
-
-              <h3 class="text-xl">Contact Phone:</h3>
-
-              <p class="my-2 bg-green-100 p-2 font-bold">555-555-5555</p>
             </div>
 
             <!-- Manage -->
