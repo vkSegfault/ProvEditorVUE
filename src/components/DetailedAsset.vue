@@ -146,7 +146,7 @@ onMounted(async () => {
               <h3 class="text-xl">Last edited by:</h3>
 
               <p class="my-2 bg-green-100 p-2 font-bold">
-                {{ state.province.modifiedBy }} {{ state.province.modifiedAt }}
+                {{ state.province.modifiedBy }} {{ Date(state.province.modifiedAt) }}
               </p>
             </div>
 
