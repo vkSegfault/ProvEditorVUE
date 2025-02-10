@@ -6,6 +6,7 @@ import axios from 'axios';
 import BackButton from './BackButton.vue';
 import { useToast } from 'vue-toastification';
 import { useStore } from 'vuex';
+import dayjs from 'dayjs';
 
 
 const store = useStore();
@@ -140,14 +141,17 @@ onMounted(async () => {
               <h3 class="text-xl">Authored by:</h3>
 
               <p class="my-2 bg-green-100 p-2 font-bold">
-                {{ state.province.authoredBy }} {{ state.province.createdAt }}
+                {{ state.province.authoredBy }} <br /> 
+                {{ dayjs(state.province.createdAt) }}
               </p>
 
               <h3 class="text-xl">Last edited by:</h3>
 
               <p class="my-2 bg-green-100 p-2 font-bold">
-                {{ state.province.modifiedBy }} {{ Date(state.province.modifiedAt) }}
+                {{ state.province.modifiedBy }} <br /> 
+                {{ dayjs(state.province.modifiedAt) }}
               </p>
+
             </div>
 
             <!-- Manage -->
