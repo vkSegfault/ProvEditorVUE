@@ -34,7 +34,7 @@ const deleteAsset = async () => {
   try {
     const confirm = window.confirm('Do you want to delete this Province?');
     if (confirm) {
-      await axios.delete(`/proxy/province/${provinceName}`);
+      await axios.delete(`/proxy/provinces/${provinceName}`);
       toast.success('Asset Deleted Successfully');
       router.push('/assets');
     }
@@ -47,7 +47,7 @@ const deleteAsset = async () => {
 
 onMounted(async () => {
     try {
-        const response = await axios.get(`/proxy/api/v1/province/${provinceName}`,
+        const response = await axios.get(`/proxy/api/v1/provinces/${provinceName}`,
         {
             headers: {
                 'accept': 'text/plain',

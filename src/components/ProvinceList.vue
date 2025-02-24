@@ -28,7 +28,7 @@ const state = reactive({
 
 onMounted(async () => {
     try {
-        const response = await axios.get('/proxy/api/v1/province/all',
+        const response = await axios.get('/proxy/api/v1/provinces',
         {
             headers: {
                 'accept': 'text/plain',

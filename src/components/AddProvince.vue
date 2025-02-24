@@ -88,7 +88,7 @@ const handleSubmit = async () => {
     // newProvince.shape = [1, 2];
     // console.log(newProvince);
 
-    const response = await axios.post( 'http://localhost:5077/api/v1/province', 
+    const response = await axios.post( 'http://localhost:5077/api/v1/provinces', 
         newProvince,
         {
           headers: {

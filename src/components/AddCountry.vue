@@ -47,7 +47,7 @@ const handleSubmit = async () => {
 //   "countryName": "Iraq",
 //   "notes": "string"
 // }'
-    const response = await axios.post(`/proxy/api/v1/country`,
+    const response = await axios.post(`/proxy/api/v1/countries`,
       newCountry,
       {
         headers: {
