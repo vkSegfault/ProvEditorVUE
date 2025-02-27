@@ -105,7 +105,7 @@ const handleSubmit = async () => {
     router.push(`/asset/${form.provinceType.toLowerCase()}/${response.data.id}`);
   } catch (error) {
     console.error('Error submitting assets:', error);
-    toast.error('Assed Not Added');
+    toast.error('Assed Not Added: \n' + error.response.data);
   }
 
 };
