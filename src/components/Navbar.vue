@@ -87,21 +87,31 @@ const logout = () => {
               </div>
               
               <div v-else class="flex space-x-2">
+
                 <RouterLink
                   to="/"
                   :class="[isActiveLink('/') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
                   >Home</RouterLink
                 >
+
                 <RouterLink
                   to="/provinces"
                   :class="[isActiveLink('/provinces') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
                   >Provinces</RouterLink
                 >
+
                 <RouterLink
                   to="/province/add"
                   :class="[isActiveLink('/province/add') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
                   >Add Province</RouterLink
                 >
+
+                <RouterLink
+                  to="/users"
+                  :class="[isActiveLink('/users') ? 'bg-green-900' : 'hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
+                  >Users</RouterLink
+                >
+
                 <RouterLink @click="logout"
                   to="/"
                   :class="['hover:bg-green-800 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
@@ -110,6 +120,7 @@ const logout = () => {
                   Logout
                 </RouterLink
                 >
+
               </div>
             </div>
           </div>

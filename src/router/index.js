@@ -9,6 +9,7 @@ import ProvinceDetailedView from "@/views/ProvinceDetailedView.vue";
 import AddProvinceView from "@/views/AddProvinceView.vue";
 import EditAssetView from "@/views/EditAssetView.vue";
 import CountryAddView from "@/views/CountryAddView.vue";
+import UserListView from "@/views/UserListView.vue";
 
 const router = createRouter({
     // we can use back button with history
@@ -70,6 +71,11 @@ const router = createRouter({
             path: '/country/add',
             name: 'country-add',
             component: CountryAddView,
+        },
+        {
+            path: '/users',
+            name: '/users',
+            component: UserListView
         },
         {
             path: '/:catchAll(.*)',
