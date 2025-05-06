@@ -62,8 +62,6 @@ const input = reactive({
   value: ''
 });
 
-let input2 = ref("");
-
 function filterUsers() {
     let filteredUsers = state.users.filter((user) =>
         user.userName.toLowerCase().includes(input.value.toLowerCase())
@@ -71,8 +69,8 @@ function filterUsers() {
     );
     console.log(input.value)
 
-    console.log("Filtered users: " + filteredUsers[0].userName);
-    console.log("Raw users: " + state.users[0].userName);
+    // console.log("Filtered users: " + filteredUsers[0].userName);
+    // console.log("Raw users: " + state.users[0].userName);
     console.log("There are " + filteredUsers.length + " that matches search criteria");
 
     state.filteredUsers = filteredUsers;
@@ -114,7 +112,10 @@ function filterUsers() {
                     <!-- <User v-for="user in state.users" :key="user.userName" :user="user" > -->
                         <!-- {{ job.title }} -->
                     <!-- </User> -->
-                    <div class="item user" v-for="user in state.filteredUsers">
+                    <div class="item user" v-if="input.value" v-for="user in state.filteredUsers">
+                        <User :key="user.userName" :user="user"></User>
+                    </div>
+                    <div class="item user" v-else v-for="user in state.users">
                         <User :key="user.userName" :user="user"></User>
                     </div>
                 </div>
