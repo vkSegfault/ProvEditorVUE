@@ -34,7 +34,7 @@ const bgColor = ref('bg-white')
 </script>
 
 <template>
-    <div class="rounded-xl shadow-md relative" :class="bgColor">
+    <!-- <div class="rounded-xl shadow-md relative" :class="bgColor">
         <div class="p-4">
             <div class="mb-6">
             <div class="text-gray-600 my-2">{{ user.id }}</div>
@@ -58,5 +58,29 @@ const bgColor = ref('bg-white')
             </RouterLink>
             </div>
         </div>
+    </div> -->
+
+    <div class="flex m-8 gap-x-4 outline outline-offset-4 outline-2 outline-green-500 rounded-lg py-3">
+        <img class="size-12 flex-none rounded-full bg-gray-50" :src="user.imageUrl" alt="picture" />
+        <div class="min-w-0 flex-auto">
+          <p class="text-sm/6 font-semibold text-gray-900">{{ user.userName }}</p>
+          <p class="mt-1 truncate text-xs/5 text-gray-500">{{ user.id }}</p>
+        </div>
+        <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+            <p class="text-sm/6 text-gray-900">{{ user.roles }}</p>
+        </div>
     </div>
+    <!-- <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+        <p class="text-sm/6 text-gray-900">{{ user.roles }}</p>
+        <p v-if="user.lastSeen" class="mt-1 text-xs/5 text-gray-500">
+          Last seen <time :datetime="user.lastSeenDateTime">{{ user.lastSeen }}</time>
+        </p>
+        <div v-else class="mt-1 flex items-center gap-x-1.5">
+          <div class="flex-none rounded-full bg-emerald-500/20 p-1">
+            <div class="size-1.5 rounded-full bg-emerald-500" />
+          </div>
+          <p class="text-xs/5 text-gray-500">Online</p>
+        </div>
+    </div> -->
+    
 </template>
