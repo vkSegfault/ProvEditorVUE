@@ -54,11 +54,18 @@ const viewAllProvinces = async () => {
 </script>
 
 <template>
+
     <section class="bg-blue-50 px-4 py-10">
         <div class="container-xl lg:container m-auto">
-            <h2 class="text-3xl font-bold text-green-500 mb-6 text-center">
-                Browse Provinces
-            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <h2 class="col-start-2 col-span-1 text-3xl font-bold text-green-500 mb-6 text-center my-4">
+                    Browse Provinces
+                </h2>
+                <button @click="viewAllProvinces"
+                    class="col-span-1 m-auto min-w-60 max-w-lg my-4 px-6 block bg-black text-white text-center py-4 px-6 rounded-xl hover:bg-gray-700"
+                    >Download as JSON <i class="mx-2 pi pi-download text-yellow-500 mb-3" style="font-size: 1.5rem"></i>
+                </button>
+            </div>
 
             <!-- Show loading spinner while state.isLoading is true -->
             <div v-if="state.isLoading" class="text-center text-gray-500 py-6">
