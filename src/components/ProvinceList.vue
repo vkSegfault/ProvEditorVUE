@@ -62,8 +62,8 @@ const viewAllProvinces = async () => {
                     Browse Provinces
                 </h2>
                 <button @click="viewAllProvinces"
-                    class="col-span-1 min-w-60 max-w-lg my-4 justify-self-end bg-gray-600 hover:bg-gray-700 text-white text-center rounded-xl"
-                    >Download as JSON <i class="mx-2 pi pi-download text-yellow-500" style="font-size: 1.1rem"></i>
+                    class="col-span-1 min-w-28 max-w-lg my-4 justify-self-end bg-gray-600 hover:bg-gray-700 text-white text-center rounded-xl"
+                    >JSON<i class="mx-2 pi pi-download text-yellow-500" style="font-size: 1.1rem"></i>
                 </button>
             </div>
 
