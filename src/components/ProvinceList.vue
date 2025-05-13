@@ -51,6 +51,19 @@ const viewAllProvinces = async () => {
     state.showButton = false
 }
 
+const downloadAllProvinces = async () => {
+    const blob = new Blob([JSON.stringify(state.provinces)], { type: "text/json" });
+    const fileURL = URL.createObjectURL(blob);
+
+    const downloadLink = document.createElement('a');
+    downloadLink.href = fileURL;
+    downloadLink.download = "provinces.json";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+
+    downloadLink.remove()
+}
+
 </script>
 
 <template>
@@ -61,7 +74,7 @@ const viewAllProvinces = async () => {
                 <h2 class="col-start-2 col-span-1 text-3xl font-bold text-green-500 mb-6 text-center my-4">
                     Browse Provinces
                 </h2>
-                <button @click="viewAllProvinces"
+                <button @click="downloadAllProvinces"
                     class="col-span-1 min-w-28 max-w-lg my-4 justify-self-end bg-gray-600 hover:bg-gray-700 text-white text-center rounded-xl"
                     >JSON<i class="mx-2 pi pi-download text-yellow-500" style="font-size: 1.1rem"></i>
                 </button>
