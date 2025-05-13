@@ -23,7 +23,7 @@ const toast = useToast();
 
 const provinceName = route.path.split('/')[2];  // route.path return whole path so e.g.: 'province/Masovia'
 // const assetType = route.params.type.toLowerCase();
-console.log("Route params + Route path: " + route.params + route.path + provinceName)
+console.log("Route params + Route path: " + route.params + route.path + provinceName);
 
 const state = reactive({
   province: {},
@@ -34,14 +34,25 @@ const deleteAsset = async () => {
   try {
     const confirm = window.confirm('Do you want to delete this Province?');
     if (confirm) {
-      await axios.delete(`/proxy/provinces/${provinceName}`);
-      toast.success('Asset Deleted Successfully');
-      router.push('/assets');
+      await axios.delete(
+        `/proxy/api/v1/provinces/?provinceName=${provinceName}`,
+        { 
+          headers: {
+            'accept': 'text/plain',
+            'Content-Type': 'application/json',
+            'Authorization': store.state.access_token
+          }
+        }
+      );
+
+      toast.success('Province Deleted Successfully');
+      router.push('/provinces');
+
     }
   } catch(error) {
     console.log(`/proxy/${provinceName}`);
-    console.error('Error Deleting Asset: ', error);
-    toast.error('Asset Not Deleted');
+    console.error('Error Deleting Province: ', error);
+    toast.error('province Not Deleted');
   }
 }
 
