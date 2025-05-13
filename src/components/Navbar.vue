@@ -24,11 +24,14 @@ const logout = () => {
 
 <template>
     <nav class="bg-gradient-to-r from-green-600 to-green-900 border-b border-green-500">
-      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div class="mx-auto max-width-none px-2 sm:px-100 lg:px-200">
         <div class="flex h-20 items-center justify-between">
           <div
             class="flex flex-1 items-center justify-center md:items-stretch md:justify-start"
           >
+            <div class="min-w-96"></div>
+            <div class="min-w-32"></div>
+
             <!-- Logo -->
             <RouterLink class="flex flex-shrink-0 items-center mr-4" to="/">
               <img class="h-10 w-auto" v-bind:src="logo" alt="Vue Finance" />
@@ -36,6 +39,7 @@ const logout = () => {
                 >Province Editor</span
               >
             </RouterLink>
+            
             <div class="md:ml-auto">
               <div v-if="store.state.logged_in == false" class="flex space-x-2">
                 <RouterLink
@@ -123,6 +127,10 @@ const logout = () => {
 
               </div>
             </div>
+
+            <div class="min-w-96"></div>
+            <div class="min-w-32"></div>
+
           </div>
         </div>
       </div>
