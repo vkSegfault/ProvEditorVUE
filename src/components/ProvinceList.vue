@@ -64,6 +64,11 @@ const downloadAllProvinces = async () => {
     downloadLink.remove()
 }
 
+const uploadProvincesGitlab = async () => {
+    // TODO
+    // implement endpoint on backend side to do so, FE should not cate about handling it, just call endpoit
+}
+
 </script>
 
 <template>
@@ -74,10 +79,19 @@ const downloadAllProvinces = async () => {
                 <h2 class="col-start-2 col-span-1 text-3xl font-bold text-green-500 mb-6 text-center my-4">
                     Browse Provinces
                 </h2>
-                <button @click="downloadAllProvinces"
-                    class="col-span-1 min-w-28 max-w-lg my-4 justify-self-end bg-gray-600 hover:bg-gray-700 text-white text-center rounded-xl"
-                    >JSON<i class="mx-2 pi pi-download text-yellow-500" style="font-size: 1.1rem"></i>
-                </button>
+
+                <div class="col-span-1 justify-self-end">
+                    <button @click="downloadAllProvinces"
+                        class="min-w-28 min-h-10 mx-4 my-4 bg-gray-600 hover:bg-gray-700 text-white text-center rounded-xl"
+                        >JSON<i class="mx-2 pi pi-download text-yellow-500" style="font-size: 1.1rem"></i>
+                    </button>
+                    <button @click="uploadProvincesGitlab"
+                        class="min-w-28 min-h-10 my-4 bg-gray-600 hover:bg-gray-700 text-white text-center rounded-xl"
+                        >Github<i class="mx-2 pi pi-sync text-yellow-500" style="font-size: 1.1rem"></i>
+                    </button>
+                </div>
+
+
             </div>
 
             <!-- Show loading spinner while state.isLoading is true -->
