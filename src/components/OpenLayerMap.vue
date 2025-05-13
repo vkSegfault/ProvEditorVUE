@@ -50,6 +50,10 @@ const converter = (lon, lat) => {
 console.log("Warsaw conversion: " + proj4("EPSG:4326", "EPSG:3857", [52.237049, 21.017532]) );
 console.log("Warsaw conversion: " + converter(52.237049, 21.017532) );
 
+// Projected Coordinates (x, y): When you convert latitude and longitude into x and y coordinates in the EPSG:3857 projection, the values are in meters.
+// The maximum and minimum x and y values are roughly 20026376.39, -20026376.39, 20048966.10, and -20048966.10, respectively. 
+// Units: EPSG:3857 uses meters as its unit of measure
+
 // const center = ref( proj4("EPSG:4326", "EPSG:3857", [52.237049, 21.017532]) );
 // const center = ref( converter(52.237049, 21.017532) );
 const center = ref([ 2_000_000, 6_000_000 ]);
