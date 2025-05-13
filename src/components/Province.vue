@@ -64,7 +64,7 @@ const bgColor = ref('bg-white')
                 :to="'/province/' + province.provinceName"
                 class="h-[36px] bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-center text-sm"
             >
-                Read More
+                Edit
             </RouterLink>
             </div>
         </div>

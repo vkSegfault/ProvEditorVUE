@@ -1,6 +1,6 @@
 <script setup>
 import { ref, defineProps, onMounted, reactive } from 'vue'
-import Asset from './Asset.vue';
+import Province from './Province.vue';
 import { RouterLink } from 'vue-router';
 import axios from 'axios';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
@@ -85,12 +85,12 @@ const downloadAllProvinces = async () => {
                 <PulseLoader />
             </div>
 
-            <!-- Show asset listing when done loading -->
+            <!-- Show province listing when done loading -->
             <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- "asset" is prop from Asset.vue -->
-                <Asset v-for="province in state.provinces.slice(0, state.limit || state.provinces.length)" :key="province.provinceName" :province="province" >  
+                <!-- "province" is prop from Province.vue -->
+                <Province v-for="province in state.provinces.slice(0, state.limit || state.provinces.length)" :key="province.provinceName" :province="province" >  
                     <!-- {{ job.title }} -->
-                </Asset>
+                </Province>
             </div>
         </div>
     </section>
