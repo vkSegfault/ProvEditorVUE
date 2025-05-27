@@ -45,7 +45,20 @@ const handleSubmit = async () => {
         router.push('/confirmmail');
 
     } catch (error) {
-        if (error.response.status == 400) {
+        if (error.response.status == 400 && error.response.data.errors.PasswordTooShort) {
+            console.log( error.response.data.errors );
+            toast.error(`Password too short... ${error.response.data.errors.PasswordTooShort}`);
+        } else if (error.response.status == 400 && error.response.data.errors.PasswordRequiresNonAlphanumeric) {
+            console.log( error.response.data.errors );
+            toast.error(`Password requires special sign... ${error.response.data.errors.PasswordRequiresNonAlphanumeric}`);
+        } else if ( error.response.status == 400 && error.response.data.errors.PasswordRequiresDigit ) {
+            console.log( error.response.data.errors );
+            toast.error(`Password requires digit... ${error.response.data.errors.PasswordRequiresDigit}`);
+        } else if (error.response.status == 400 && error.response.data.errors.PasswordRequiresUpper) {
+            console.log( error.response.data.errors );
+            toast.error(`Password requires Capital lettet... ${error.response.data.errors.PasswordRequiresUpper}`);
+        } else if (error.response.status == 400) {
+            console.log( error.response.data.errors );
             toast.error('User already exists...');
         } else {
             console.log('Error:', error.response.status);
